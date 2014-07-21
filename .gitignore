@@ -4,3 +4,4 @@ public/stylesheets/application.css
 node_modules
 dist/*
 vendor
+tmp
