@@ -1,0 +1,8 @@
+<h3>feedzors</h3>
+<ul>
+  {{#each}}
+  <li>
+    <a target="_blank" {{bind-attr href="feed_url"}}>{{name}}</a>
+  </li>
+  {{/each}}
+</ul>
