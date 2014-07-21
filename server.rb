@@ -36,6 +36,7 @@ get '/' do
 end
 
 get '/feeds' do
+  redirect to('/') unless request.accept.map(&:to_s).include?("application/json")
   content_type :json
   {feeds: Feed.all}.to_json
 end
