@@ -12,6 +12,7 @@ require 'feedjira'
 
 # Require classes needed for project
 require path_to('lib/models/feed')
+require path_to('lib/models/story')
 
 configure do
   set :views, File.expand_path(path_to 'dist')

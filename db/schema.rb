@@ -11,11 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140721150233) do
+ActiveRecord::Schema.define(version: 20140722195108) do
 
   create_table "feeds", force: true do |t|
     t.string "name",     null: false
     t.string "feed_url", null: false
+  end
+
+  create_table "stories", force: true do |t|
+    t.string   "url"
+    t.string   "author"
+    t.datetime "updated"
+    t.datetime "published"
+    t.text     "summary"
+    t.text     "content"
+    t.integer  "feed_id"
+    t.string   "title"
   end
 
 end
