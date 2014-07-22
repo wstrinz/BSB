@@ -3,24 +3,24 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>CliTest</title>
+    <title>Ember Feed</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {{BASE_TAG}}
 
     <link rel="stylesheet" href="assets/vendor.css">
-    <link rel="stylesheet" href="assets/cli-test.css">
+    <link rel="stylesheet" href="assets/feed-ember.css">
   </head>
   <body>
     <script>
-      window.CliTestENV = {{ENV}};
-      window.EmberENV = window.CliTestENV.EmberENV;
+      window.FeedEmberENV = {{ENV}};
+      window.EmberENV = window.FeedEmberENV.EmberENV;
     </script>
     <script src="assets/vendor.js"></script>
-    <script src="assets/cli-test.js"></script>
+    <script src="assets/feed-ember.js"></script>
     <script>
-      window.CliTest = require('cli-test/app')['default'].create(CliTestENV.APP);
+      window.FeedEmber = require('feed-ember/app')['default'].create(FeedEmberENV.APP);
     </script>
   </body>
 </html>

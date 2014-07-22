@@ -3,7 +3,7 @@ import Resolver from 'ember/resolver';
 var resolver = Resolver.create();
 
 resolver.namespace = {
-  modulePrefix: 'cli-test'
+  modulePrefix: 'feed-ember'
 };
 
 export default resolver;

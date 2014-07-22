@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>CliTest Tests</title>
+    <title>FeedEmber Tests</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {{BASE_TAG}}
 
     <link rel="stylesheet" href="assets/vendor.css">
-    <link rel="stylesheet" href="assets/cli-test.css">
+    <link rel="stylesheet" href="assets/feed-ember.css">
     <link rel="stylesheet" href="assets/qunit.css">
     <style>
       #ember-testing-container {
@@ -34,16 +34,16 @@
     <div id="qunit-fixture"></div>
 
     <script>
-      window.CliTestENV = {{ENV}};
-      window.EmberENV = window.CliTestENV.EmberENV;
+      window.FeedEmberENV = {{ENV}};
+      window.EmberENV = window.FeedEmberENV.EmberENV;
     </script>
     <script src="assets/qunit.js"></script>
     <script src="assets/qunit-notifications.js"></script>
     <script src="assets/vendor.js"></script>
-    <script src="assets/cli-test.js"></script>
+    <script src="assets/feed-ember.js"></script>
     <script src="testem.js"></script>
     <script>
-      require('cli-test/tests/test-helper');
+      require('feed-ember/tests/test-helper');
     </script>
     <script src="assets/test-loader.js"></script>
   </body>
