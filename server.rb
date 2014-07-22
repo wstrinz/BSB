@@ -8,16 +8,10 @@ require 'bundler/setup'
 require 'sinatra'
 require 'sinatra/activerecord'
 
-require 'erb'
-require 'haml'
-require 'sass/plugin/rack'
-
 require 'feedjira'
 
 # Require classes needed for project
-require path_to('lib/models/feed.rb')
-
-use Sass::Plugin::Rack
+require path_to('lib/models/feed')
 
 configure do
   set :views, File.expand_path(path_to 'dist')
