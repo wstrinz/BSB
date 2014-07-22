@@ -1,6 +1,7 @@
 .sass-cache/*
 public/stylesheets/application.css
 *.sqlite3
+*.db
 node_modules
 dist/*
 vendor

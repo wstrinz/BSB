@@ -16,8 +16,6 @@ require path_to('lib/models/feed')
 configure do
   set :views, File.expand_path(path_to 'dist')
   set :public_folder, File.expand_path(path_to 'dist')
-  set :haml, { :attr_wrapper => '"', :format => :html5 }
-  set :database, { adapter: "sqlite3", database: "feed-ember.sqlite3" }
 end
 
 configure :development do
