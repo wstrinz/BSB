@@ -24,12 +24,36 @@ configure :development do
   Sinatra::Application.also_reload "lib/**/*.rb"
 end
 
+get '*', provides: 'html' do
+  pass unless request.accept.map(&:to_s).include?('text/html')
+  send_file 'dist/index.html'
+end
+
 get '/' do
   send_file 'dist/index.html'
 end
 
 get '/feeds' do
-  redirect to('/') unless request.accept.map(&:to_s).include?("application/json")
   content_type :json
-  {feeds: Feed.all}.to_json
+  { feeds: Feed.all }.to_json
+end
+
+get '/feed/:id' do
+  content_type :json
+  { feed: Feed.find(params[:id]) }.to_json
+end
+
+get '/feed/:id/stories' do
+  content_type :json
+  { stories: Feed.find(params[:id]).stories }.to_json
+end
+
+get '/stories' do
+  content_type :json
+  { stories: Story.all }.to_json
+end
+
+get '/story/:id' do
+  content_type :json
+  { story: Story.find(params[:id]) }.to_json
 end
