@@ -15,7 +15,6 @@ require path_to('lib/models/feed')
 require path_to('lib/models/story')
 
 configure do
-  set :views, File.expand_path(path_to 'dist')
   set :public_folder, File.expand_path(path_to 'dist')
 end
 
@@ -46,10 +45,14 @@ end
 
 get '/stories' do
   content_type :json
-  { stories: Story.all }.to_json
+  if params[:ids]
+    { stories: Story.where(id: params[:ids]) }.to_json
+  else
+    { stories: Story.all }.to_json
+  end
 end
 
-get '/story/:id' do
+get '/stories/:id' do
   content_type :json
   { story: Story.find(params[:id]) }.to_json
 end

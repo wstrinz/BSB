@@ -5,7 +5,7 @@
 <ul>
 {{#each stories}}
   <li>
-    {{title}}
+  {{#link-to 'stories.show' id}}{{title}}{{/link-to}}
   </li>
 {{/each}}
 </ul>
