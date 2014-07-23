@@ -5,6 +5,6 @@ export default DS.Model.extend({
   author: DS.attr('string'),
   url: DS.attr('string'),
   summary: DS.attr('string'),
-  content: DS.attr('string'),
+  story_content: DS.attr('string'),
   feed: DS.belongsTo('feed')
 });
