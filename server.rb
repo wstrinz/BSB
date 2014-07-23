@@ -29,10 +29,6 @@ get '*', provides: 'html' do
   send_file 'dist/index.html'
 end
 
-get '/' do
-  send_file 'dist/index.html'
-end
-
 get '/feeds' do
   content_type :json
   { feeds: Feed.all }.to_json
