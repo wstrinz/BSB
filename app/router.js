@@ -10,8 +10,9 @@ Router.map(function() {
   this.resource('feeds', function(){
     this.route('show', { path: '/:feed_id' });
   });
-  //this.resource('feed', { path: 'feeds/:feed_id' });
-  this.resource('stories', { path: '/stories' });
+  this.resource('stories', function(){
+    this.route('show', { path: '/:story_id' });
+  });
 });
 
 export default Router;
