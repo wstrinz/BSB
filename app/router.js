@@ -7,24 +7,11 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.resource('feeds', { path: '/feeds' });
-  this.resource('feed', { path: 'feeds/:feed_id' });
+  this.resource('feeds', function(){
+    this.route('show', { path: '/:feed_id' });
+  });
+  //this.resource('feed', { path: 'feeds/:feed_id' });
+  this.resource('stories', { path: '/stories' });
 });
 
 export default Router;
-//App.Router.map(function() {
-  //this.resource('feeds', { path: '/feeds' });
-  //this.resource('feed', { path: 'feeds/:feed_id' });
-//});
-
-//App.FeedsRoute = Ember.Route.extend({
-  //model: function(){
-    //return this.store.find('feed');
-  //}
-//});
-
-//App.IndexRoute = Ember.Route.extend({
-  //redirect: function() {
-   //this.transitionTo('feeds');
-  //}
-//});

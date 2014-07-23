@@ -34,7 +34,7 @@ get '/feeds' do
   { feeds: Feed.all }.to_json
 end
 
-get '/feed/:id' do
+get '/feeds/:id' do
   content_type :json
   { feed: Feed.find(params[:id]) }.to_json
 end

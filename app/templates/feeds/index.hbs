@@ -2,7 +2,7 @@
 <ul>
   {{#each}}
   <li>
-    <a target="_blank" {{bind-attr href="feed_url"}}>{{name}}</a>
+    {{#link-to 'feeds.show' id}}{{name}}{{/link-to}}
   </li>
   {{/each}}
 </ul>
