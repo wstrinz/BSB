@@ -31,16 +31,12 @@ end
 
 get '/feeds' do
   content_type :json
-  { feeds: Feed.all }.to_json(include: { stories: { only: :id }})
+  { feeds: Feed.all }.to_json(methods: :story_ids)
 end
 
 get '/feeds/:id' do
   content_type :json
-  f = Feed.find(params[:id])
-  h = JSON.parse({ feed: f }.to_json)
-  h["feed"]["story_ids"] = f.story_ids
-  h.to_json
-  #.to_json(include: { stories: { only: :id }})
+  { feed: Feed.find(params[:id]) }.to_json(methods: :story_ids)
 end
 
 get '/feed/:id/stories' do
