@@ -32,4 +32,25 @@ describe 'Feed Server' do
       expect(JSON.parse last_response.body).to eq(JSON.parse feed_1_json)
     end
   end
+
+  describe 'Stories' do
+    before do
+      create :story
+    end
+
+    let(:stories_json) { { stories: Story.all }.to_json }
+    let(:story_1_json) { { story: Story.first }.to_json }
+
+    it 'gets all feeds' do
+      header "ACCEPT", "application/json"
+      get '/stories'
+      expect(JSON.parse last_response.body).to eq(JSON.parse stories_json)
+    end
+
+    it 'gets individual feed' do
+      header "ACCEPT", "application/json"
+      get '/stories/1'
+      expect(JSON.parse last_response.body).to eq(JSON.parse story_1_json)
+    end
+  end
 end
