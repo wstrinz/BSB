@@ -26,8 +26,14 @@ configure :development do
 end
 
 get '*' do
-  pass unless request.accept.map(&:to_s).include?('text/html')
+  accepts_json = request.accept.map(&:to_s).include?('application/json')
+  only_accepts_all = request.accept.first.to_s == '*/*'
+  pass if accepts_json || only_accepts_all
   send_file 'dist/index.html'
+end
+
+post '/feeds' do
+  require 'pry'; binding.pry
 end
 
 api_routes Feed
