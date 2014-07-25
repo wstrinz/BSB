@@ -8,6 +8,10 @@ gem 'sinatra-activerecord'
 gem 'rake'
 gem 'pg'
 
+gem 'rspec'
+gem 'factory_girl'
+gem 'database_cleaner'
+
 group :development do
   gem 'sqlite3'
 

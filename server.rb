@@ -24,7 +24,7 @@ configure :development do
 end
 
 get '*' do
-  pass unless request.accept.map(&:to_s).include?('text/html')
+  pass if request.accept.map(&:to_s).include?('application/json')
   send_file 'dist/index.html'
 end
 
