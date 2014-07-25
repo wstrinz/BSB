@@ -8,6 +8,7 @@ describe 'Feed Server' do
   end
 
   it 'runs' do
+    header "ACCEPT", "text/html"
     get '/'
     expect(last_response).to be_ok
   end
