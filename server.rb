@@ -33,7 +33,8 @@ get '*' do
 end
 
 post '/feeds' do
-  require 'pry'; binding.pry
+  data = JSON.parse(request.body.read)
+  Feed.create!(data["feed"])
 end
 
 api_routes Feed
