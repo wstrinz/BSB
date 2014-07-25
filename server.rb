@@ -14,8 +14,12 @@ require 'feedjira'
 require path_to('lib/models/feed')
 require path_to('lib/models/story')
 
+require_relative 'lib/routes_helper'
+include RoutesHelper
+
 configure do
   set :public_folder, File.expand_path(path_to 'dist')
+  api_routes Feed
 end
 
 configure :development do
@@ -23,19 +27,10 @@ configure :development do
   Sinatra::Application.also_reload "lib/**/*.rb"
 end
 
+
 get '*' do
   pass if request.accept.map(&:to_s).include?('application/json')
   send_file 'dist/index.html'
-end
-
-get '/feeds' do
-  content_type :json
-  { feeds: Feed.all }.to_json(methods: :story_ids)
-end
-
-get '/feeds/:id' do
-  content_type :json
-  { feed: Feed.find(params[:id]) }.to_json(methods: :story_ids)
 end
 
 get '/feed/:id/stories' do
