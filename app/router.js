@@ -6,7 +6,7 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
   this.resource('feeds', function(){
-    this.route('show', { path: '/:feed_id' });
+    this.route('stories', { path: '/:feed_id' });
   });
   this.resource('stories', function(){
     this.route('show', { path: '/:story_id' });

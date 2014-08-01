@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140723214001) do
+ActiveRecord::Schema.define(version: 20140801200927) do
 
   create_table "feeds", force: true do |t|
     t.string "name",     null: false
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20140723214001) do
     t.text     "story_content"
     t.integer  "feed_id"
     t.string   "title"
+    t.datetime "fetched_at"
   end
 
 end

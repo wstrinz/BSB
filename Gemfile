@@ -12,6 +12,8 @@ gem 'rspec'
 gem 'factory_girl'
 gem 'database_cleaner'
 
+gem 'thin'
+
 group :development do
   gem 'sqlite3'
 

@@ -1,11 +1,8 @@
 {{#link-to 'feeds'}}All Feeds{{/link-to}}
-<h3>{{model.[0].feed.name}}</h3>
 <a target="_blank" {{bind-attr href="feed_url"}}>{{feed_url}}</a>
 <h4>Stories</h4>
 <ul>
 {{#each}}
-  <li>
-  {{#link-to 'stories.show' id}}{{title}}{{/link-to}}
-  </li>
+  {{partial 'stories/_story-small'}}
 {{/each}}
 </ul>
