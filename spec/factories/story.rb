@@ -5,6 +5,7 @@ FactoryGirl.define do
     url 'http://example.org'
     summary 'short summary'
     story_content '<h1>content for reading yay</h1>'
+    published Time.now
     feed
   end
 end

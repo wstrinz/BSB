@@ -1,5 +1,5 @@
 module RoutesHelper
-  def api_routes(model)
+  def api_routes(model, *extra_methods)
     app = Sinatra::Application
     plural_sym = model.model_name.collection.to_sym
     single_sym = model.model_name.element.to_sym
@@ -11,7 +11,7 @@ module RoutesHelper
       "#{a.name.to_s.singularize}_ids".to_sym
     end
 
-    json_opts = {methods: association_colums}
+    json_opts = {methods: association_colums + extra_methods}
 
     app.get("/#{plural_sym.to_s}") do
       content_type :json
