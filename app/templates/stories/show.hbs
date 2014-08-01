@@ -1,13 +1,1 @@
-<h3>
-  <a target="_blank" {{bind-attr href="url"}}>
-    {{title}}
-  </a>
-</h3>
-<p>
-  {{#link-to 'feeds.show' feed.id}}
-    {{feed.name}}
-  {{/link-to}}
-</p>
-<p>{{author}}</p>
-<p>{{published}}</p>
-<p>{{{story_content}}}</p>
+{{partial "stories/_story"}}

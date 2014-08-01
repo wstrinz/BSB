@@ -1,5 +1,3 @@
 {{#each}}
-<h3><a target="_blank" {{bind-attr href="url"}}>{{title}}</a></h3>
-{{#link-to 'feeds.show' feed.id}}{{feed.name}}{{/link-to}}
-{{{content}}}
+{{partial 'stories/_story'}}
 {{/each}}
