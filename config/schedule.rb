@@ -19,6 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 #
-every 1.hours do
+set :output, 'feed_updates.log'
+every 15.minutes do
   rake "update_feeds"
 end
