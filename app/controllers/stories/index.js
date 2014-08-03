@@ -13,6 +13,17 @@ export default Ember.ArrayController.extend({
       else{
         this.set('showRead', true);
       }
+    },
+    toggleRead: function(id){
+      this.store.find('story', id).then(
+      function(s){
+        if(s.get('read'))
+          s.set('read', false);
+        else
+          s.set('read', true);
+
+        s.save();
+      });
     }
   },
   showReadStories: function(){

@@ -1,1 +1,6 @@
-<li>{{#link-to 'stories.show' story.id}}{{story.title}} - {{story.feed.name}}{{/link-to}} </li>
+<li>
+  <button {{action 'toggleRead' story.id}}>
+    {{#if story.read}}u{{else}}m{{/if}}
+  </button>
+  {{#link-to 'stories.show' story.id}}{{story.title}} - {{story.feed.name}}{{/link-to}}
+</li>
