@@ -37,5 +37,10 @@ post '/feeds' do
   Feed.create!(data["feed"])
 end
 
+put '/stories/:id' do
+  post_params = JSON.parse(request.body.read)
+  Story.find(params[:id]).update_attributes(post_params["story"])
+end
+
 api_routes Feed
 api_routes Story

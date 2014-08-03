@@ -2,7 +2,8 @@ class Story < ActiveRecord::Base
   belongs_to :feed
 
   def self.from_entry(e)
-    props = (attribute_names - %w{id feed_id story_content fetched_at timestamp}).each_with_object({}) do |a, h|
+    model_only = %w{id feed_id story_content fetched_at timestamp model_only}
+    props = (attribute_names - model_only).each_with_object({}) do |a, h|
       h[a.to_sym] = e.send(a.to_sym)
     end
 

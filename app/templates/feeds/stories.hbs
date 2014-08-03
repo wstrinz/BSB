@@ -1,8 +1,15 @@
 {{#link-to 'feeds'}}All Feeds{{/link-to}}
 <a target="_blank" {{bind-attr href="feed_url"}}>{{feed_url}}</a>
 <h4>Stories</h4>
+<p>Show Read: <button {{action toggleShowRead}}>{{showReadStories}}</button></p>
 <ul>
-{{#each}}
-  {{partial 'feeds/_feed-story-small'}}
-{{/each}}
+{{#if showReadStories}}
+  {{#each story in model}}
+    {{partial 'feeds/_feed-story-small'}}
+  {{/each}}
+{{else}}
+  {{#each story in unreadStories}}
+    {{partial 'feeds/_feed-story-small'}}
+  {{/each}}
+{{/if}}
 </ul>

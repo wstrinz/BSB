@@ -1,3 +1,10 @@
-{{#each}}
-{{partial 'stories/_story-small'}}
-{{/each}}
+<p>Show Read: <button {{action toggleShowRead}}>{{showReadStories}}</button></p>
+{{#if showReadStories}}
+  {{#each story in model}}
+    {{partial 'stories/_story-small'}}
+  {{/each}}
+{{else}}
+  {{#each story in unreadStories}}
+    {{partial 'stories/_story-small'}}
+  {{/each}}
+{{/if}}
