@@ -11,4 +11,11 @@
 <p>{{author}}</p>
 <p>{{timestamp}}</p>
 <p><button {{action 'markUnread'}}>Mark Unread</button></p>
-<p>{{{story_content}}}</p>
+<p>
+{{#if story_content}}
+{{{story_content}}}
+{{else}}
+{{{summary}}}
+{{/if}}
+</p>
+<p></p>
