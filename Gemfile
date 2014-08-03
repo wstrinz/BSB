@@ -4,6 +4,7 @@ gem 'sinatra'
 gem 'sinatra-reloader'
 
 gem 'feedjira'
+gem 'whenever', :require => false
 gem 'sinatra-activerecord'
 gem 'rake'
 gem 'pg'

@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
-  sortProperties: ['published'],
+  sortProperties: ['timestamp'],
   sortAscending: false
 });

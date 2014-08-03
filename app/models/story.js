@@ -6,6 +6,7 @@ export default DS.Model.extend({
   url: DS.attr('string'),
   published: DS.attr('date'),
   fetched_at: DS.attr('date'),
+  timestamp: DS.attr('date'),
   summary: DS.attr('string'),
   story_content: DS.attr('string'),
   feed: DS.belongsTo('feed')
