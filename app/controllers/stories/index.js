@@ -17,10 +17,8 @@ export default Ember.ArrayController.extend({
     toggleRead: function(id){
       this.store.find('story', id).then(
       function(s){
-        if(s.get('read'))
-          s.set('read', false);
-        else
-          s.set('read', true);
+        if(s.get('read')){ s.set('read', false); }
+        else{ s.set('read', true); }
 
         s.save();
       });
