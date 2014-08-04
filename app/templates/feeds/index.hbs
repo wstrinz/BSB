@@ -1,6 +1,7 @@
 <input id="add_feed"/>
 <button {{action 'add_feed'}}>Add feed</button>
-<h3>All Feeds</h3>
+<div>{{#link-to 'stories.index'}}All Stories{{/link-to}}</div>
+<div><h3>Feeds</h3></div>
 <ul>
   {{#each}}
   <li>
