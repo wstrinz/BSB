@@ -9,6 +9,12 @@ R = Ember.Route.extend
     story.save()
     null
 
+  shortcuts:
+    'u': 'markUnread'
+    'j': 'nextStory'
+    'k': 'prevStory'
+    'shift+a': 'loggy'
+
   actions:
     markUnread: ->
       mod = @controller.get 'model'
