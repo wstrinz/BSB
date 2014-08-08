@@ -22,7 +22,7 @@ R = Ember.Route.extend
       mod.save()
       @transitionTo 'feeds.stories', mod.get('feed').get('id')
 
-    prevStory: ->
+    nextStory: ->
       model = @controller.get 'model'
       id = parseInt(model.get('id'))
       r = this
@@ -34,7 +34,7 @@ R = Ember.Route.extend
         r.transitionTo('stories.show', nextId)
       )
 
-    nextStory: ->
+    prevStory: ->
       model = @controller.get 'model'
       id = parseInt(model.get('id'))
       r = this
