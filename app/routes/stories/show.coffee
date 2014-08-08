@@ -10,6 +10,7 @@ R = Ember.Route.extend
     null
 
   shortcuts:
+    'p': 'toggleShowInIframe'
     'u': 'markUnread'
     'j': 'nextStory'
     'k': 'prevStory'
@@ -45,5 +46,11 @@ R = Ember.Route.extend
         nextId = nextStories[0].get('id')
         r.transitionTo('stories.show', nextId)
       )
+
+    toggleShowInIframe: ->
+      if @controller.get('showInIframe')
+        @controller.set('showInIframe', false)
+      else
+        @controller.set('showInIframe', true)
 
 `export default R`
