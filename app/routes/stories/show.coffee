@@ -16,6 +16,18 @@ R = Ember.Route.extend
       mod.save()
       @transitionTo 'feeds.stories', mod.get('feed').get('id')
 
+    prevStory: ->
+      model = @controller.get 'model'
+      id = parseInt(model.get('id'))
+      r = this
+      model.get('feed').get('stories').then((stories) ->
+        nextStories = stories.filter((s) ->
+          s.get('read') == false && parseInt(s.get('id')) < id)
+
+        nextId = nextStories[nextStories.length - 1].get('id')
+        r.transitionTo('stories.show', nextId)
+      )
+
     nextStory: ->
       model = @controller.get 'model'
       id = parseInt(model.get('id'))

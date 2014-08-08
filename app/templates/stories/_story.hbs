@@ -10,9 +10,7 @@
 </p>
 <p>{{author}}</p>
 <p>{{timestamp}}</p>
-<p><button {{action 'markUnread'}}>Mark Unread</button></p>
-<p><button {{action 'nextStory'}}>Next</button></p>
-<p><button {{action 'toggleShowInIframe'}}>Preview</button></p>
+{{partial 'stories/_story-controls'}}
 <p>
 {{#if showInIframe}}
   <iframe {{bind-attr src=url}}></iframe>
@@ -24,4 +22,4 @@
   {{/if}}
 {{/if}}
 </p>
-<p></p>
+{{partial 'stories/_story-controls'}}
