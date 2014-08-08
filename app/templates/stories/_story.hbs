@@ -11,11 +11,17 @@
 <p>{{author}}</p>
 <p>{{timestamp}}</p>
 <p><button {{action 'markUnread'}}>Mark Unread</button></p>
+<p><button {{action 'nextStory'}}>Next</button></p>
+<p><button {{action 'toggleShowInIframe'}}>Preview</button></p>
 <p>
-{{#if story_content}}
-{{{story_content}}}
+{{#if showInIframe}}
+  <iframe {{bind-attr src=url}}></iframe>
 {{else}}
-{{{summary}}}
+  {{#if story_content}}
+  {{{story_content}}}
+  {{else}}
+  {{{summary}}}
+  {{/if}}
 {{/if}}
 </p>
 <p></p>

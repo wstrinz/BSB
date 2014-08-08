@@ -1,8 +1,10 @@
 `import Ember from 'ember'`
 
 C = Ember.ArrayController.extend
-  sortProperties: ['timestamp'],
-  sortAscending: false,
+  sortProperties: ['timestamp']
+  sortAscending: false
+  nextFeedStory: Ember.computed -> 2
+
   actions:
     toggleShowRead: ->
       su = @get 'showRead'

@@ -5,4 +5,9 @@ body {
   font: 100% $font-stack;
   color: $primary-color;
   font-size: 2em;
+
+  iframe {
+    height: 700px;
+    width: 100%;
+  }
 }
