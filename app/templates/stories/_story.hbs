@@ -13,7 +13,7 @@
 {{partial 'stories/_story-controls'}}
 <p>
 {{#if showInIframe}}
-  <iframe {{bind-attr src=url}}></iframe>
+  <iframe seamless {{bind-attr src=url}}></iframe>
 {{else}}
   {{#if story_content}}
   {{{story_content}}}

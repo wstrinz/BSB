@@ -11,17 +11,20 @@ R = Ember.Route.extend
 
   shortcuts:
     'p': 'toggleShowInIframe'
-    'u': 'markUnread'
+    'u': 'toggleRead'
     'j': 'nextStory'
     'k': 'prevStory'
     'shift+a': 'loggy'
 
   actions:
-    markUnread: ->
+    toggleRead: ->
       mod = @controller.get 'model'
-      mod.set 'read', false
+      if mod.get 'read'
+        mod.set 'read', false
+      else
+        mod.set 'read', true
+
       mod.save()
-      @transitionTo 'feeds.stories', mod.get('feed').get('id')
 
     nextStory: ->
       model = @controller.get 'model'

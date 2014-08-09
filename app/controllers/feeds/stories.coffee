@@ -1,7 +1,7 @@
 `import Ember from 'ember'`
 
 C = Ember.ArrayController.extend
-  sortProperties: ['timestamp']
+  sortProperties: ['timestamp', 'id']
   sortAscending: false
   nextFeedStory: Ember.computed -> 2
 

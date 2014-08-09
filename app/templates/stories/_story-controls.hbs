@@ -1,5 +1,10 @@
 <span style="display: inline;">
-  <p><button {{action 'markUnread'}}>Mark Unread</button></p>
+  {{#if read}}
+  <p><button {{action 'toggleRead'}}>Mark Unread</button></p>
+  {{else}}
+  <p><button {{action 'toggleRead'}}>Mark Read</button></p>
+  {{/if}}
+
   <p><button {{action 'toggleShowInIframe'}}>Preview</button></p>
   <p>
     <button {{action 'nextStory'}}>Next</button>
