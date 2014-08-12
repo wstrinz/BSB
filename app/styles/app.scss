@@ -10,4 +10,20 @@ body {
     height: 700px;
     width: 100%;
   }
+
+  button.story-length {
+    height: 700px;
+    width: 100%;
+  }
+
+  button.fill-all {
+    width: 100%;
+    height: 100%;
+    font-size: 1.25em;
+  }
+
+  div.no-edge {
+    width: 4%;
+    padding: 0px;
+  }
 }

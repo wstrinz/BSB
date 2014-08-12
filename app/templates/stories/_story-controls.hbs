@@ -1,13 +1,15 @@
-<span style="display: inline;">
-  {{#if read}}
-  <p><button {{action 'toggleRead'}}>Mark Unread</button></p>
-  {{else}}
-  <p><button {{action 'toggleRead'}}>Mark Read</button></p>
-  {{/if}}
+<div class='row'>
+  <div class='col-md-1'>
+  </div>
+  <div class='col-md-1'>
+    {{#if read}}
+    <button class='fill-all' {{action 'toggleRead'}}>●</button>
+    {{else}}
+    <button class='fill-all' {{action 'toggleRead'}}>○</button>
+    {{/if}}
+  </div>
 
-  <p><button {{action 'toggleShowInIframe'}}>Preview</button></p>
-  <p>
-    <button {{action 'nextStory'}}>Next</button>
-    <button {{action 'prevStory'}}>Prev</button>
-  </p>
+  <div class='col-md-2'>
+    <button class='fill-all' {{action 'toggleShowInIframe'}}>Preview</button>
+  </div>
 </span>
