@@ -52,8 +52,12 @@ R = Ember.Route.extend
 
     toggleShowInIframe: ->
       if @controller.get('showInIframe')
-        @controller.set('showInIframe', false)
+        if !@controller.get('sandboxIframe')
+          @controller.set('sandboxIframe', true)
+        else
+          @controller.set('showInIframe', false)
       else
         @controller.set('showInIframe', true)
+        @controller.set('sandboxIframe', false)
 
 `export default R`

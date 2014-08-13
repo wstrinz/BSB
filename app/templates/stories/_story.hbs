@@ -2,38 +2,16 @@
   {{partial 'stories/_story-header'}}
   {{partial 'stories/_story-controls'}}
   <div class='row'>
-  <h3>
-    <a target="_blank" {{bind-attr href="url"}}>
-      {{title}}
-    </a>
-  </h3>
-  </div>
-  <div class='row'>
-    <div class='col-md-4'>
-      <p>
-      {{#link-to 'feeds.stories' feed.id}}
-      {{feed.name}}
-      {{/link-to}}
-      </p>
-    </div>
-    <div class='col-md-4'>
-      <p>{{author}}</p>
-    </div>
-    <div class='col-md-4'>
-      <p>{{timestamp}}</p>
-    </div>
-  </div>
-  <div class='row'>
-    {{partial 'stories/_story-controls'}}
-  </div>
-  <p>
-  <div class='row'>
-    <div class='col-md-1 no-edge'>
+    <div class='col-md-1'>
       <button class='story-length' {{action 'prevStory'}}>◀</button>
     </div>
     <div class='col-md-10'>
       {{#if showInIframe}}
+        {{#if sandboxIframe}}
+        <iframe sandbox {{bind-attr src=url}}></iframe>
+        {{else}}
         <iframe seamless {{bind-attr src=url}}></iframe>
+        {{/if}}
       {{else}}
         {{#if story_content}}
           {{{story_content}}}

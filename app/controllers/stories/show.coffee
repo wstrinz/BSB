@@ -1,6 +1,6 @@
 `import Ember from 'ember'`
 
 C = Ember.ObjectController.extend
-  showInIframe: true
+  showInIframe: false
 
 `export default C`

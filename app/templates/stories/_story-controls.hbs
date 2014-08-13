@@ -10,6 +10,16 @@
   </div>
 
   <div class='col-md-2'>
-    <button class='fill-all' {{action 'toggleShowInIframe'}}>Preview</button>
+    <button class='fill-all' {{action 'toggleShowInIframe'}}>
+      {{#if showInIframe}}
+        {{#if sandboxIframe}}
+        RSS
+        {{else}}
+        Sandbox
+        {{/if}}
+      {{else}}
+        Preview
+      {{/if}}
+    </button>
   </div>
-</span>
+</div>
