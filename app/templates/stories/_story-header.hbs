@@ -1,0 +1,22 @@
+<div class='row'>
+  <h3>
+    <a target="_blank" {{bind-attr href="url"}}>
+      {{title}}
+    </a>
+  </h3>
+</div>
+<div class='row'>
+  <div class='col-md-4'>
+    <p>
+    {{#link-to 'feeds.stories' feed.id}}
+    {{feed.name}}
+    {{/link-to}}
+    </p>
+  </div>
+  <div class='col-md-4'>
+    <p>{{author}}</p>
+  </div>
+  <div class='col-md-4'>
+    <p>{{timestamp}}</p>
+  </div>
+</div>

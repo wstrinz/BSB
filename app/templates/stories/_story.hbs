@@ -1,4 +1,6 @@
 <div class='container-fluid'>
+  {{partial 'stories/_story-header'}}
+  {{partial 'stories/_story-controls'}}
   <div class='row'>
   <h3>
     <a target="_blank" {{bind-attr href="url"}}>
@@ -40,12 +42,9 @@
         {{/if}}
       {{/if}}
     </div>
-    <div class='col-md-1 no-edge'>
+    <div class='col-md-1'>
       <button class='story-length' {{action 'nextStory'}}>▶</button>
     </div>
   </div>
-  </p>
-  <div class='row'>
-    {{partial 'stories/_story-controls'}}
-  </div>
+  {{partial 'stories/_story-controls'}}
 </div>
