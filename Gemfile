@@ -15,6 +15,8 @@ gem 'database_cleaner'
 
 gem 'thin'
 
+gem 'ruby-hackernews'
+
 group :development do
   gem 'sqlite3'
 

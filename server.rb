@@ -12,6 +12,7 @@ require 'feedjira'
 
 require path_to('lib/models/feed')
 require path_to('lib/models/story')
+require path_to('lib/models/feeds/hacker_news')
 
 require_relative 'lib/routes_helper'
 include RoutesHelper
