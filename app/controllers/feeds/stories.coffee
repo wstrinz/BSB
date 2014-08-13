@@ -3,7 +3,6 @@
 C = Ember.ArrayController.extend
   sortProperties: ['timestamp', 'id']
   sortAscending: false
-  nextFeedStory: Ember.computed -> 2
 
   actions:
     toggleShowRead: ->
@@ -25,5 +24,12 @@ C = Ember.ArrayController.extend
   unreadStories: Ember.computed '@each.read', ->
     @filter (story) ->
       story.get('read') == false
+
+  storyCount: Ember.computed '@each.read', 'showRead' ->
+    if @get('showRead')
+      this.length
+    else
+      @get('unreadStories').length
+
 
 `export default C`
