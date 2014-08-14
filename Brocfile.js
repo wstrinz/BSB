@@ -18,6 +18,8 @@ var app = new EmberApp();
 // along with the exports of each module as its value.
 
 app.import('vendor/ember-shortcuts/ember-shortcuts.js');
+app.import('vendor/hammerjs/hammer.js');
+app.import('vendor/ember-hammer/ember-hammer.js');
 app.import('vendor/bootstrap/dist/js/bootstrap.js');
 app.import('vendor/bootstrap/dist/css/bootstrap.css');
 app.import('vendor/bootstrap/dist/css/bootstrap-theme.css');

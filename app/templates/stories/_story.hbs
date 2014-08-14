@@ -2,10 +2,7 @@
   {{partial 'stories/_story-header'}}
   {{partial 'stories/_story-controls'}}
   <div class='row'>
-    <div class='col-md-1'>
-      <button class='story-length' {{action 'prevStory'}}>◀</button>
-    </div>
-    <div class='col-md-10'>
+    <div class='col-md-12'>
       {{#if showInIframe}}
         {{#if sandboxIframe}}
         <iframe sandbox {{bind-attr src=url}}></iframe>
@@ -20,9 +17,8 @@
         {{/if}}
       {{/if}}
     </div>
-    <div class='col-md-1'>
-      <button class='story-length' {{action 'nextStory'}}>▶</button>
-    </div>
   </div>
+  {{#if showInIframe}}
   {{partial 'stories/_story-controls'}}
+  {{/if}}
 </div>

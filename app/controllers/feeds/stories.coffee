@@ -25,7 +25,7 @@ C = Ember.ArrayController.extend
     @filter (story) ->
       story.get('read') == false
 
-  storyCount: Ember.computed '@each.read', 'showRead' ->
+  storyCount: Ember.computed '@each.read', 'showRead', ->
     if @get('showRead')
       this.length
     else
