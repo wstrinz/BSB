@@ -17,5 +17,9 @@ V = Ember.View.extend
       e.gesture.stopDetect()
       e.gesture.preventDefault()
       this.controller.send('toggleRead')
+    doubleTap: (e) ->
+      e.gesture.stopDetect()
+      e.gesture.preventDefault()
+      this.controller.send('toggleShowInIframe')
 
 `export default V`
