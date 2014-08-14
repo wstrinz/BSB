@@ -10,7 +10,6 @@ V = Ember.View.extend
       e.gesture.preventDefault()
       this.controller.send('nextStory')
     swipeRight: (e) ->
-      debugger
       e.gesture.stopDetect()
       e.gesture.preventDefault()
       this.controller.send('prevStory')
