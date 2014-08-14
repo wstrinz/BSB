@@ -5,9 +5,9 @@ V = Ember.View.extend
     swipe_velocity: 0.5
 
   gestures:
-    swipeLeft: (event) ->
+    swipeLeft: ->
       this.controller.send('nextStory')
-    swipeRight: (event) ->
+    swipeRight: ->
       this.controller.send('prevStory')
 
 `export default V`
