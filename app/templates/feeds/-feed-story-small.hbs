@@ -1,1 +1,3 @@
-<li>{{#link-to 'stories.show' story.id}}{{story.title}}{{/link-to}}</li>
+<li {{bind-attr class="story.focused"}}>
+{{#link-to 'stories.show' story.id}}{{story.title}}{{/link-to}}
+</li>

@@ -16,6 +16,7 @@ R = Ember.Route.extend
     'k': 'prevStory'
     's': 'toggleSandboxIframe'
     'f': 'backToFeed'
+
   actions:
     toggleRead: ->
       mod = @controller.get 'model'
