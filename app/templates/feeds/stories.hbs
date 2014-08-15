@@ -5,11 +5,11 @@
 <ul>
 {{#if showReadStories}}
   {{#each story in model}}
-    {{partial 'feeds/-feed-story-small'}}
+    {{partial 'feeds/feed-story-small'}}
   {{/each}}
 {{else}}
   {{#each story in unreadStories}}
-    {{partial 'feeds/-feed-story-small'}}
+    {{partial 'feeds/feed-story-small'}}
   {{/each}}
 {{/if}}
 </ul>
