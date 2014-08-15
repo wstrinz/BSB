@@ -15,8 +15,7 @@ R = Ember.Route.extend
     'j': 'nextStory'
     'k': 'prevStory'
     's': 'toggleSandboxIframe'
-    'shift+a': 'loggy'
-
+    'f': 'backToFeed'
   actions:
     toggleRead: ->
       mod = @controller.get 'model'
@@ -62,5 +61,9 @@ R = Ember.Route.extend
         @controller.set('sandboxIframe', false)
       else
         @controller.set('sandboxIframe', true)
+
+    backToFeed: ->
+      id = @controller.get('model').get('feed').get('id')
+      @transitionTo('feeds.stories', id)
 
 `export default R`
