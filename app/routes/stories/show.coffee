@@ -14,6 +14,7 @@ R = Ember.Route.extend
     'u': 'toggleRead'
     'j': 'nextStory'
     'k': 'prevStory'
+    's': 'toggleSandboxIframe'
     'shift+a': 'loggy'
 
   actions:
@@ -52,12 +53,14 @@ R = Ember.Route.extend
 
     toggleShowInIframe: ->
       if @controller.get('showInIframe')
-        if !@controller.get('sandboxIframe')
-          @controller.set('sandboxIframe', true)
-        else
-          @controller.set('showInIframe', false)
+        @controller.set('showInIframe', false)
       else
         @controller.set('showInIframe', true)
+
+    toggleSandboxIframe: ->
+      if @controller.get('sandboxIframe')
         @controller.set('sandboxIframe', false)
+      else
+        @controller.set('sandboxIframe', true)
 
 `export default R`
