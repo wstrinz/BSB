@@ -1,6 +1,6 @@
 import { test, moduleFor } from 'ember-qunit';
 
-moduleFor('route:feed', 'FeedRoute', {
+moduleFor('route:feeds/stories', 'FeedStoriesRoute', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });
