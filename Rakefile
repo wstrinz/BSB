@@ -8,3 +8,8 @@ task :update_feeds do
     f.update
   end
 end
+
+desc "Clear database of stories"
+task :clear_stories do
+  Story.destroy_all
+end
