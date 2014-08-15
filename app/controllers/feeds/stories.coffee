@@ -22,7 +22,7 @@ C = Ember.ArrayController.extend
       su
 
   unreadStories: Ember.computed '@each.read', ->
-    @filter((story) -> story.get('read') == false).sortBy('timestamp')
+    @filter((story) -> story.get('read') == false).sortBy('timestamp').reverse()
 
   storyCount: Ember.computed '@each.read', 'showRead', ->
     if @get('showRead')

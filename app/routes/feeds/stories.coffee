@@ -6,10 +6,11 @@ R = Ember.Route.extend
 
   setupController: (controller, model) ->
     controller.set('model', model)
-    unread = model.filter((m) -> m.get('read') == false).sortBy('timestamp')
-    if unread[0] && !controller.get('focusedStory')
-      unread[0].set('focused', true)
-      controller.set('focusedStory', unread[0])
+    unread = model.sortBy('timestamp').reverse().filter((m) -> m.get('read') == false)
+    target = unread[0]
+    if target && !controller.get('focusedStory')
+      target.set('focused', true)
+      controller.set('focusedStory', target)
 
   shortcuts:
     'z': 'prevStory'
@@ -27,8 +28,8 @@ R = Ember.Route.extend
         @controller.set('focusedStory', current)
 
       prevStories = model.filter((s) ->
-        s.get('read') == false && s.get('timestamp') < current.get('timestamp')
-      ).sortBy('timestamp')
+        s.get('read') == false && s.get('timestamp') > current.get('timestamp')
+      ).sortBy('timestamp').reverse()
 
       prev = prevStories[prevStories.length - 1]
       prev.set 'focused', true
@@ -44,8 +45,8 @@ R = Ember.Route.extend
         @controller.set('focusedStory', current)
 
       nextStories = model.filter((s) ->
-        s.get('read') == false && s.get('timestamp') > current.get('timestamp')
-      ).sortBy('timestamp')
+        s.get('read') == false && s.get('timestamp') < current.get('timestamp')
+      ).sortBy('timestamp').reverse()
 
       next = nextStories[0]
       next.set 'focused', true
