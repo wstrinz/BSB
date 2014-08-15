@@ -8,18 +8,23 @@ V = Ember.View.extend
     swipeLeft: (e) ->
       e.gesture.stopDetect()
       e.gesture.preventDefault()
-      this.controller.send('nextStory')
+      @controller.send('nextStory')
+
     swipeRight: (e) ->
       e.gesture.stopDetect()
       e.gesture.preventDefault()
-      this.controller.send('prevStory')
+      console.log(e)
+      @controller.send('prevStory')
+
     rotate: (e) ->
       e.gesture.stopDetect()
       e.gesture.preventDefault()
+      if Math.abs(e.gesture.rotation) > 2
+        @controller.send('toggleShowInIframe')
+      else
+        false
+
+    doubletap: ->
       this.controller.send('toggleRead')
-    doubleTap: (e) ->
-      e.gesture.stopDetect()
-      e.gesture.preventDefault()
-      this.controller.send('toggleShowInIframe')
 
 `export default V`
