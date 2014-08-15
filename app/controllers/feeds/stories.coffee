@@ -1,7 +1,7 @@
 `import Ember from 'ember'`
 
 C = Ember.ArrayController.extend
-  sortProperties: ['timestamp', 'id']
+  sortProperties: ['timestamp']
   sortAscending: false
 
   actions:
@@ -22,8 +22,7 @@ C = Ember.ArrayController.extend
       su
 
   unreadStories: Ember.computed '@each.read', ->
-    @filter (story) ->
-      story.get('read') == false
+    @filter((story) -> story.get('read') == false).sortBy('timestamp')
 
   storyCount: Ember.computed '@each.read', 'showRead', ->
     if @get('showRead')
