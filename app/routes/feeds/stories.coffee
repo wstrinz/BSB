@@ -7,9 +7,11 @@ R = Ember.Route.extend
   setupController: (controller, model) ->
     controller.set('model', model)
     unread = model.sortBy('timestamp').reverse().filter((m) -> m.get('read') == false)
+    currentFeed = model.content[0].get('feed.id')
     target = unread[0]
-    if target && !controller.get('focusedStory')
+    if target && (!controller.get('focusedStory') || controller.get('feed') != currentFeed)
       target.set('focused', true)
+      controller.set('feed', currentFeed)
       controller.set('focusedStory', target)
 
   shortcuts:
