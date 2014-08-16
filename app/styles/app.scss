@@ -12,6 +12,12 @@ body {
     width: 100%;
   }
 
+  .no-show-link {
+    a {
+      color: black;
+    }
+  }
+
   button.story-length {
     height: 700px;
     width: 100%;
