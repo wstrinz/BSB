@@ -3,14 +3,14 @@
 This README outlines the details of collaborating on this Ember application.
 
 ## Installation
-
-* `git clone` this repository
-* `npm install`
-* `bower install`
-* `ember build`
-* `bundle`
-* `rake db:migrate`
-
+```shell
+git clone https://github.com/wstrinz/BSB.git
+npm install
+bower install
+ember build
+bundle
+rake db:migrate
+```
 ## Running
 
 * `ruby server.rb`
