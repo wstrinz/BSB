@@ -1,4 +1,5 @@
 `import DS from 'ember-data'`
+`import Ember from 'ember'`
 
 Story = DS.Model.extend
   title: DS.attr('string')
@@ -11,5 +12,7 @@ Story = DS.Model.extend
   summary: DS.attr('string')
   story_content: DS.attr('string')
   feed: DS.belongsTo('feed')
+  human_time: Ember.computed 'timestamp', ->
+    moment(@get('timestamp')).format('LLL')
 
 `export default Story`

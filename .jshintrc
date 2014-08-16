@@ -2,6 +2,7 @@
   "predef": {
     "document": true,
     "window": true,
+    "moment": true,
     "FeedEmberENV": true
   },
   "browser" : true,
