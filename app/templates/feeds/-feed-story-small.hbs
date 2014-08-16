@@ -1,3 +1,13 @@
 <li {{bind-attr class="story.focused"}}>
-{{#link-to 'stories.show' story.id}}{{story.title}}{{/link-to}}
+<div>{{#link-to 'stories.show' story.id}}{{story.title}}{{/link-to}}</div>
+{{#if story.focused}}
+  <div class='container-fluid'>
+    <div class='row story-summary-info'>
+      <div class='col-md-8'>{{story.author}} -- {{story.timestamp}}</div>
+    </div>
+    <div class='row story-summary'>
+      <div class='col-md-12'>{{{story.summary}}}</div>
+    </div>
+  </div>
+{{/if}}
 </li>
