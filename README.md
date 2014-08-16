@@ -5,6 +5,7 @@ This README outlines the details of collaborating on this Ember application.
 ## Installation
 ```shell
 git clone https://github.com/wstrinz/BSB.git
+cd BSB
 npm install
 bower install
 ember build
