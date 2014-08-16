@@ -16,6 +16,7 @@ class Feed < ActiveRecord::Base
         s = Story.from_entry(e)
         s.feed = self
         s.save
+        s.update_sharecount
       end
     end
     logger.info "Feed #{name} updated #{update_count} stories"

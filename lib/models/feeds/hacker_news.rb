@@ -16,10 +16,12 @@ class HackerNewsFeed < Feed
       end
       #s.story_content = e.text
       s.url = e.link.href
+      s.url = 'http://news.ycombinator.com/' + s.url if e.link.href[/^item\?id=\d+$/]
       s.title = "#{e.link.title} - (#{e.link.site})"
       s.fetched_at = t
       s.timestamp = s.published
-      s.save!
+      s.update_sharecount
+      s.save
     end
   end
 end

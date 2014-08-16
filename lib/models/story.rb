@@ -21,9 +21,9 @@ class Story < ActiveRecord::Base
 
   def update_sharecount
     key = ENV['sharedcount_key']
-    data = JSON.parse Curl.get('http://free.sharedcount.com/',
-                               {apikey: key, url: self.url}).body_str
+    response = Curl.get('http://free.sharedcount.com/', {apikey: key, url: self.url})
 
+    data = JSON.parse response.body_str
     if data["Error"]
       logger.info("failed to fetch share count for #{self.url}")
     else
