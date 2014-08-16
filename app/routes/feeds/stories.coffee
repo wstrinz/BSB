@@ -5,14 +5,8 @@ R = Ember.Route.extend
     (f) -> f.get('stories'))
 
   setupController: (controller, model) ->
-    controller.set('model', model)
-    unread = model.sortBy('timestamp').reverse().filter((m) -> m.get('read') == false)
-    currentFeed = model.content[0].get('feed.id')
-    target = unread[0]
-    if target && (!controller.get('focusedStory') || controller.get('feed') != currentFeed)
-      target.set('focused', true)
-      controller.set('feed', currentFeed)
-      controller.set('focusedStory', target)
+    controller.set 'model', model
+    controller.send 'resetFocus', false
 
   shortcuts:
     'z': 'prevStory'
@@ -24,14 +18,15 @@ R = Ember.Route.extend
     prevStory: ->
       current = @controller.get('focusedStory')
       model = @controller.get 'model'
+      sortMethod = @controller.get('storySort')
 
       unless current
         current = model.find((m) -> m.get('focused'))
         @controller.set('focusedStory', current)
 
       prevStories = model.filter((s) ->
-        s.get('read') == false && s.get('timestamp') > current.get('timestamp')
-      ).sortBy('timestamp').reverse()
+        s.get('read') == false && s.get(sortMethod) > current.get(sortMethod)
+      ).sortBy(sortMethod).reverse()
 
       prev = prevStories[prevStories.length - 1]
       prev.set 'focused', true
@@ -41,14 +36,15 @@ R = Ember.Route.extend
     nextStory: ->
       current = @controller.get('focusedStory')
       model = @controller.get 'model'
+      sortMethod = @controller.get('storySort')
 
       unless current
         current = model.find((m) -> m.get('focused'))
         @controller.set('focusedStory', current)
 
       nextStories = model.filter((s) ->
-        s.get('read') == false && s.get('timestamp') < current.get('timestamp')
-      ).sortBy('timestamp').reverse()
+        s.get('read') == false && s.get(sortMethod) < current.get(sortMethod)
+      ).sortBy(@controller.get('storySort')).reverse()
 
       next = nextStories[0]
       next.set 'focused', true

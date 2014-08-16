@@ -120,6 +120,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  curb
   database_cleaner
   factory_girl
   feedjira

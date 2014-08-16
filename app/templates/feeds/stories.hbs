@@ -2,6 +2,7 @@
 <a target="_blank" {{bind-attr href="feed_url"}}>{{feed_url}}</a>
 <h4>Stories: {{storyCount}}</h4>
 <p>Show Read: <button {{action toggleShowRead}}>{{showReadStories}}</button></p>
+<p>Sort: <button {{action cycleSort}}>{{storySort}}</button></p>
 <ul>
 {{#if showReadStories}}
   {{#each story in model}}

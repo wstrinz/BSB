@@ -4,5 +4,6 @@ public/stylesheets/application.css
 *.db
 node_modules
 dist/*
+keys/*
 vendor
 tmp

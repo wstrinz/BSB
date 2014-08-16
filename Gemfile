@@ -14,6 +14,7 @@ gem 'factory_girl'
 gem 'database_cleaner'
 
 gem 'thin'
+gem 'curb'
 
 gem 'ruby-hackernews'
 

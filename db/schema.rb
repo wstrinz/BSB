@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813025546) do
+ActiveRecord::Schema.define(version: 20140816205622) do
 
   create_table "feeds", force: true do |t|
     t.string "name",     null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20140813025546) do
     t.datetime "fetched_at"
     t.datetime "timestamp"
     t.boolean  "read",          default: false
+    t.integer  "sharecount"
   end
 
 end
