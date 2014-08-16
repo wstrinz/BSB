@@ -29,26 +29,26 @@ R = Ember.Route.extend
 
     nextStory: ->
       model = @controller.get 'model'
-      id = parseInt(model.get('id'))
+      t = model.get('timestamp')
       r = this
-      model.get('feed').get('stories').then((stories) ->
-        nextStories = stories.filter((s) ->
-          s.get('read') == false && parseInt(s.get('id')) < id)
-
-        nextId = nextStories[nextStories.length - 1].get('id')
+      model.get('feed.stories').then((stories) ->
+        nextStories = stories.filter (s) ->
+          s.get('read') == false && s.get('timestamp') < t
+        
+        nextId = nextStories[0].get('id')
         r.transitionTo('stories.show', nextId)
       )
 
     prevStory: ->
       model = @controller.get 'model'
-      id = parseInt(model.get('id'))
+      t = model.get('timestamp')
       r = this
-      model.get('feed').get('stories').then((stories) ->
-        nextStories = stories.filter (s) ->
-          s.get('read') == false && parseInt(s.get('id')) > id
-
-        nextId = nextStories[0].get('id')
-        r.transitionTo('stories.show', nextId)
+      model.get('feed.stories').then((stories) ->
+        prevStories = stories.filter (s) ->
+          s.get('read') == false && s.get('timestamp') > t
+        
+        prevId = prevStories[prevStories.length - 1].get('id')
+        r.transitionTo('stories.show', prevId)
       )
 
     toggleShowInIframe: ->
