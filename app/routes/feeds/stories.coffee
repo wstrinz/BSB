@@ -14,61 +14,62 @@ R = Ember.Route.extend
     'v': 'toggleRead'
     'c': 'readStory'
 
+  currentStory: Ember.computed 'controller.focusedStory', ->
+    current = @controller.get('focusedStory')
+
+    unless current
+      current = @controller.get('model').find((m) -> m.get('focused'))
+      @controller.set('focusedStory', current)
+
+    current
+
+  storyAt: (offset) ->
+    current = @get('currentStory')
+    model = @controller.get 'model'
+    sortMethod = @controller.get('storySort')
+    showRead = @controller.get 'showReadStories'
+
+    stories = model.filter((s) ->
+      incl = true
+      unless showRead
+        incl = incl && !s.get('read')
+
+      if offset > 0
+         incl = incl && s.get(sortMethod) < current.get(sortMethod)
+      else
+         incl = incl && s.get(sortMethod) > current.get(sortMethod)
+
+      incl
+    ).sortBy(sortMethod).reverse()
+
+    if offset > 0
+      stories[offset - 1]
+    else
+      stories[stories.length + offset]
+
   actions:
     prevStory: ->
-      current = @controller.get('focusedStory')
-      model = @controller.get 'model'
-      sortMethod = @controller.get('storySort')
-
-      unless current
-        current = model.find((m) -> m.get('focused'))
-        @controller.set('focusedStory', current)
-
-      prevStories = model.filter((s) ->
-        s.get('read') == false && s.get(sortMethod) > current.get(sortMethod)
-      ).sortBy(sortMethod).reverse()
-
-      prev = prevStories[prevStories.length - 1]
+      prev = @storyAt -1
       prev.set 'focused', true
-      current.set 'focused', false
+      @get('currentStory').set 'focused', false
       @controller.set 'focusedStory', prev
 
     nextStory: ->
-      current = @controller.get('focusedStory')
-      model = @controller.get 'model'
-      sortMethod = @controller.get('storySort')
-
-      unless current
-        current = model.find((m) -> m.get('focused'))
-        @controller.set('focusedStory', current)
-
-      nextStories = model.filter((s) ->
-        s.get('read') == false && s.get(sortMethod) < current.get(sortMethod)
-      ).sortBy(@controller.get('storySort')).reverse()
-
-      next = nextStories[0]
+      next = @storyAt 1
       next.set 'focused', true
-      current.set 'focused', false
+      @get('currentStory').set 'focused', false
       @controller.set 'focusedStory', next
 
     readStory: ->
-      current = @controller.get 'focusedStory'
+      current = @get 'currentStory'
       model = @controller.get 'model'
-
-      unless current
-        current = model.find (m) -> m.get('focused')
-        @controller.set('focusedStory', current)
 
       @send('nextStory')
       @transitionTo 'stories.show', current.get('id')
 
     toggleRead: ->
-      current = @controller.get 'focusedStory'
+      current = @get 'currentStory'
       model = @controller.get 'model'
-
-      unless current
-        current = model.find (m) -> m.get('focused')
-        @controller.set('focusedStory', current)
 
       if current.get('read')
         current.set('read', false)
