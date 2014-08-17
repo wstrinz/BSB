@@ -44,9 +44,12 @@ C = Ember.ArrayController.extend
          incl = incl && s.get(sortMethod) > current.get(sortMethod)
 
       incl
-    ).sortBy(sortMethod).reverse()
+    ).sortBy(sortMethod, 'id').reverse()
 
     if offset > 0
+      if stories.length < 3
+        @send('loadNextPage')
+
       stories[offset - 1]
     else
       stories[stories.length + offset]
