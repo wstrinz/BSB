@@ -15,15 +15,4 @@ V = Ember.View.extend
       e.gesture.preventDefault()
       @controller.send('prevItem')
 
-    rotate: (e) ->
-      e.gesture.stopDetect()
-      e.gesture.preventDefault()
-      if Math.abs(e.gesture.rotation) > 2
-        @controller.send('toggleShowInIframe')
-      else
-        false
-
-    doubletap: ->
-      this.controller.send('toggleRead')
-
 `export default V`
