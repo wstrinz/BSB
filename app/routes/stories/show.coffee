@@ -50,14 +50,14 @@ R = Ember.Route.extend
 
       mod.save()
 
-    nextStory: ->
+    nextItem: ->
       r = this
       @storyAt(1).then (s) ->
         r.transitionTo 'stories.show', s.get('id')
 
-    prevStory: ->
+    prevItem: ->
       r = this
-      @storyAt(1).then (s) ->
+      @storyAt(-1).then (s) ->
         r.transitionTo 'stories.show', s.get('id')
 
     toggleShowInIframe: ->
@@ -73,7 +73,7 @@ R = Ember.Route.extend
         @controller.set('sandboxIframe', true)
 
     backToFeed: ->
-      id = @controller.get('model').get('feed').get('id')
+      id = @controller.get('model.feed.id')
       @transitionTo('feeds.stories', id)
 
 `export default R`

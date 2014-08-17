@@ -9,8 +9,10 @@ R = Ember.Route.extend
     'u': 'toggleCurrentRead'
     'f': 'backToFeed'
     'shift+f': 'backToHome'
+    'shift+s': 'backToStories'
 
   actions:
     backToHome: -> @transitionTo('feeds.index')
+    backToStories: -> @transitionTo('stories.index')
 
 `export default R`

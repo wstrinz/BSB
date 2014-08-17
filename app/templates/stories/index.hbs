@@ -1,4 +1,5 @@
 <p>Show Read: <button {{action toggleShowRead}}>{{showReadStories}}</button></p>
+<p>Sort: <button {{action cycleSort}}>{{controllers.application.storySort}}</button></p>
 {{#if showReadStories}}
   {{#each story in model}}
     {{partial 'stories/story-small'}}

@@ -10,5 +10,7 @@ R = Ember.Route.extend
   actions:
     nextItem: -> @controller.send('nextItem')
     prevItem: -> @controller.send('prevItem')
+    viewItem: -> @controller.send('viewItem')
+    toggleCurrentRead: -> @controller.send('toggleCurrentRead')
 
 `export default R`

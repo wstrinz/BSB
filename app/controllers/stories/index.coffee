@@ -99,6 +99,27 @@ C = Ember.ArrayController.extend
         @set('focusedStory', prev)
         prev.set('focused', true)
 
+    viewItem: ->
+      current = @get 'currentStory'
+
+      @send 'nextItem'
+      @transitionToRoute 'stories.show', current.get('id')
+
+    cycleSort: ->
+      @set('controllers.application.storySort', @get('controllers.application.nextSort'))
+      @send('resetFocus', true)
+
+    toggleCurrentRead: ->
+      current = @get 'currentStory'
+
+      if current.get('read')
+        current.set('read', false)
+      else
+        current.set('read', true)
+
+      current.save()
+      @send 'nextItem'
+
 
 
 `export default C`
