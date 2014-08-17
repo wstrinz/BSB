@@ -22,4 +22,5 @@
 set :output, 'feed_updates.log'
 every 1.hours do
   rake "update_feeds"
+  rake "refresh_sharecounts"
 end

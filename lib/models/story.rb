@@ -16,7 +16,21 @@ class Story < ActiveRecord::Base
       props[:timestamp] = props[:fetched_at]
     end
 
+    props[:created_at] = Time.now
+    props[:updated_at] = Time.now
+
     create!(props)
+  end
+
+  def self.refresh_sharecounts
+    key = ENV['sharedcount']
+    resp = JSON.parse Curl.get('http://free.sharedcount.com/quota', {apikey: key}).body_str
+    remaining = resp["quota_allocated_today"]
+    amt = remaining * 0.02
+    to_refresh = [Story.where(read: false).count, amt.to_i].min
+    Story.where(read: false).order(:updated_at).limit(to_refresh).each do |s|
+      s.update_sharecount
+    end
   end
 
   def update_sharecount
@@ -28,6 +42,7 @@ class Story < ActiveRecord::Base
       logger.info("failed to fetch share count for #{self.url}: \n\t #{data["Error"]}")
     else
       self.sharecount = data.except("Facebook").values.sum + data["Facebook"].values.sum
+      self.updated_at = Time.now
       save!
     end
   end
