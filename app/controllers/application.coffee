@@ -9,5 +9,6 @@ C = Ember.Controller.extend
       'sharecount'
     else
       'timestamp'
+  unreadButtonsInIndex: false
 
 `export default C`

@@ -1,6 +1,21 @@
-<li>
-  <button {{action 'toggleRead' story.id}}>
-    {{#if story.read}}u{{else}}m{{/if}}
-  </button>
-  {{#link-to 'stories.show' story.id}}{{story.title}} - {{story.feed.name}}{{/link-to}}
+<li {{bind-attr class="story.focused"}}>
+  <div>
+    {{#if controllers.application.unreadButtonsInIndex}}
+      <button {{action 'toggleRead' story.id}}>
+        {{#if story.read}}●{{else}}○{{/if}}
+      </button>
+    {{/if}}
+    {{#link-to 'stories.show' story.id}}{{story.title}} - {{story.feed.name}}{{/link-to}}
+  </div>
+  {{#if story.focused}}
+  <div class='container-fluid'>
+    <div class='row story-summary-info'>
+      <div class='col-md-6'>{{story.author}} -- {{story.human_time}}</div>
+      <div class='col-md-1'>{{story.sharecount}}</div>
+    </div>
+    <div class='row story-summary'>
+      <div class='col-md-12'>{{{story.summary}}}</div>
+    </div>
+  </div>
+  {{/if}}
 </li>

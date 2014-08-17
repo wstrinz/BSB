@@ -6,6 +6,38 @@ C = Ember.ArrayController.extend
   sortAscending: false
   storySort: Ember.computed.alias 'controllers.application.storySort'
 
+  currentStory: Ember.computed 'focusedStory', ->
+    current = @get('focusedStory')
+
+    unless current
+      current = @get('model').find((m) -> m.get('focused'))
+      @set('focusedStory', current)
+
+    current
+
+  storyAt: (offset) ->
+    current = @get('currentStory')
+    sortMethod = @get('storySort')
+    showRead = @get 'showReadStories'
+
+    stories = @get('model').filter((s) ->
+      incl = true
+      unless showRead
+        incl = incl && !s.get('read')
+
+      if offset > 0
+         incl = incl && s.get(sortMethod) < current.get(sortMethod)
+      else
+         incl = incl && s.get(sortMethod) > current.get(sortMethod)
+
+      incl
+    ).sortBy(sortMethod).reverse()
+
+    if offset > 0
+      stories[offset - 1]
+    else
+      stories[stories.length + offset]
+
   showReadStories: Ember.computed 'showRead', ->
     su = @get 'showRead'
     if su == undefined
@@ -39,10 +71,9 @@ C = Ember.ArrayController.extend
 
     resetFocus: (force) ->
       model = @get('model')
-      sortMethod = @get('storySort')
       current = @get('focusedStory')
 
-      stories = model.sortBy(sortMethod).reverse()
+      stories = model.sortBy(@get('storySort')).reverse()
 
       unless @get('showRead')
         stories = stories.filter((m) -> m.get('read') == false)
@@ -55,5 +86,36 @@ C = Ember.ArrayController.extend
         target.set('focused', true)
         @set('feed', currentFeed)
         @set('focusedStory', target)
+
+    nextItem: ->
+      next = @storyAt 1
+      if next
+        next.set 'focused', true
+        @get('currentStory').set 'focused', false
+        @set 'focusedStory', next
+
+    prevItem: ->
+      prev = @storyAt -1
+      if prev
+        prev.set 'focused', true
+        @get('currentStory').set 'focused', false
+        @set 'focusedStory', prev
+
+    viewItem: ->
+      current = @get 'currentStory'
+
+      @send 'nextItem'
+      @transitionToRoute 'stories.show', current.get('id')
+
+    toggleCurrentRead: ->
+      current = @get 'currentStory'
+
+      if current.get('read')
+        current.set('read', false)
+      else
+        current.set('read', true)
+
+      current.save()
+      @send 'nextItem'
 
 `export default C`

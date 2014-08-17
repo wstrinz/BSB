@@ -38,11 +38,7 @@ R = Ember.Route.extend
 
   shortcuts:
     'p': 'toggleShowInIframe'
-    'u': 'toggleRead'
-    'j': 'nextStory'
-    'k': 'prevStory'
     's': 'toggleSandboxIframe'
-    'f': 'backToFeed'
 
   actions:
     toggleRead: ->
