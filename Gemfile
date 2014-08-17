@@ -8,6 +8,7 @@ gem 'whenever', :require => false
 gem 'sinatra-activerecord'
 gem 'rake'
 gem 'pg'
+gem 'will_paginate'
 
 gem 'rspec'
 gem 'factory_girl'

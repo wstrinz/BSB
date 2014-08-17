@@ -1,7 +1,7 @@
 `import Ember from 'ember'`
 
 C = Ember.Controller.extend
-  storySort: 'timestamp'
+  storySort: 'sharecount'
   sortMethod: Ember.computed 'storySort', ->
     [@get 'storySort']
   nextSort: Ember.computed 'storySort', ->
@@ -10,5 +10,6 @@ C = Ember.Controller.extend
     else
       'timestamp'
   unreadButtonsInIndex: false
+  showRead: false
 
 `export default C`

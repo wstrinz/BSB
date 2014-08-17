@@ -7,6 +7,8 @@ end
 require 'bundler/setup'
 require 'sinatra'
 require 'sinatra/activerecord'
+require 'will_paginate'
+require 'will_paginate/active_record'
 
 require 'feedjira'
 
@@ -53,6 +55,25 @@ get '*' do
   only_accepts_all = request.accept.first.to_s == '*/*'
   pass if accepts_json || only_accepts_all
   send_file 'dist/index.html'
+end
+
+get '/stories' do
+  content_type :json
+  query_opts = {}
+  query_opts[:id] = params[:ids] if params[:ids]
+  query_opts[:read] = (params[:read] == "true") if params[:read]
+  order = params[:sort] if params[:sort]
+  page = params[:page] || 1
+
+  resp = if order
+           { stories: Story.where(query_opts)
+             .order(order => :desc)
+             .paginate(page: page, per_page: 15) }
+         else
+           { stories: Story.where(query_opts).paginate(page: page) }
+         end
+
+  resp.to_json
 end
 
 post '/feeds' do

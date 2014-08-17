@@ -1,7 +1,9 @@
 `import Ember from 'ember'`
 
 R = Ember.Route.extend
-  model: -> @store.find('story').then((s) -> s)
+  model: ->
+    appcon = @controllerFor('application')
+    @store.find 'story', read: appcon.get('showRead'), sort: appcon.get('storySort')
 
   setupController: (controller, model) ->
     controller.set 'model', model
@@ -12,5 +14,15 @@ R = Ember.Route.extend
     prevItem: -> @controller.send('prevItem')
     viewItem: -> @controller.send('viewItem')
     toggleCurrentRead: -> @controller.send('toggleCurrentRead')
+
+    reload: ->
+      appcon = @controllerFor('application')
+      model = @controller.get('model')
+
+      @store.find('story',
+        read: appcon.get('showRead'),
+        sort: appcon.get('storySort'),
+        page: @controller.get('page')
+      ).then((s) -> model.addObjects(s))
 
 `export default R`

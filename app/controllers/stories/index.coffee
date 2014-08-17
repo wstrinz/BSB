@@ -4,6 +4,7 @@ C = Ember.ArrayController.extend
   needs: ['application']
   sortProperties: Ember.computed.alias 'controllers.application.sortMethod'
   sortAscending: false,
+  page: 1
 
   currentStory: Ember.computed 'focusedStory', ->
     current = @get('focusedStory')
@@ -120,6 +121,8 @@ C = Ember.ArrayController.extend
       current.save()
       @send 'nextItem'
 
-
+    loadNextPage: ->
+      @set('page', @get('page') + 1)
+      @send('reload')
 
 `export default C`
