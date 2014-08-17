@@ -9,6 +9,33 @@ R = Ember.Route.extend
     story.save()
     null
 
+  storyAt: (offset) ->
+    model = @controller.get 'model'
+    sortMethod = @controllerFor('application').get 'storySort'
+    showRead = @controller.get 'showReadStories'
+    comp = model.get(sortMethod)
+    feed_stories = model.get('feed.stories')
+
+    stories = feed_stories.then((st) ->
+      st.filter((s) ->
+        incl = true
+        unless showRead
+          incl = incl && !s.get('read')
+
+        if offset > 0
+          incl = incl && s.get(sortMethod) < comp
+        else
+          incl = incl && s.get(sortMethod) > comp
+
+        incl
+      ).sortBy(sortMethod).reverse())
+
+    stories.then (s) ->
+      if offset > 0
+        s[offset - 1]
+      else
+        s[s.length + offset]
+
   shortcuts:
     'p': 'toggleShowInIframe'
     'u': 'toggleRead'
@@ -28,28 +55,14 @@ R = Ember.Route.extend
       mod.save()
 
     nextStory: ->
-      model = @controller.get 'model'
-      t = model.get('timestamp')
       r = this
-      model.get('feed.stories').then((stories) ->
-        nextStories = stories.filter (s) ->
-          s.get('read') == false && s.get('timestamp') < t
-        
-        nextId = nextStories[0].get('id')
-        r.transitionTo('stories.show', nextId)
-      )
+      @storyAt(1).then (s) ->
+        r.transitionTo 'stories.show', s.get('id')
 
     prevStory: ->
-      model = @controller.get 'model'
-      t = model.get('timestamp')
       r = this
-      model.get('feed.stories').then((stories) ->
-        prevStories = stories.filter (s) ->
-          s.get('read') == false && s.get('timestamp') > t
-        
-        prevId = prevStories[prevStories.length - 1].get('id')
-        r.transitionTo('stories.show', prevId)
-      )
+      @storyAt(1).then (s) ->
+        r.transitionTo 'stories.show', s.get('id')
 
     toggleShowInIframe: ->
       if @controller.get('showInIframe')
