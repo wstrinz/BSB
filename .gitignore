@@ -7,3 +7,4 @@ dist/*
 keys/*
 vendor
 tmp
+secrets.yml

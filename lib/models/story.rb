@@ -20,12 +20,12 @@ class Story < ActiveRecord::Base
   end
 
   def update_sharecount
-    key = ENV['sharedcount_key']
+    key = ENV['sharedcount']
     response = Curl.get('http://free.sharedcount.com/', {apikey: key, url: self.url})
 
     data = JSON.parse response.body_str
     if data["Error"]
-      logger.info("failed to fetch share count for #{self.url}")
+      logger.info("failed to fetch share count for #{self.url}: \n\t #{data["Error"]}")
     else
       self.sharecount = data.except("Facebook").values.sum + data["Facebook"].values.sum
       save!

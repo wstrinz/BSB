@@ -17,8 +17,30 @@ require path_to('lib/models/feeds/hacker_news')
 require_relative 'lib/routes_helper'
 include RoutesHelper
 
+class ApiKeys
+  class << self
+    attr_writer :keys
+
+    def keys
+      @keys ||= {}
+    end
+
+    def load(h)
+      keys.merge(h)
+      h.each do |k,v|
+        ENV[k.to_s] = v
+      end
+    end
+  end
+end
+
 configure do
   set :public_folder, File.expand_path(path_to 'dist')
+  if File.exist? 'secrets.yml'
+    ApiKeys.load YAML.load open('secrets.yml').read
+  else
+    logger.info 'No secrets.yml found, some integrations may be unavailable'
+  end
 end
 
 configure :development do
