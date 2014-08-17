@@ -23,6 +23,9 @@ R = Ember.Route.extend
         read: appcon.get('showRead'),
         sort: appcon.get('storySort'),
         page: @controller.get('page')
-      ).then((s) -> model.addObjects(s))
+      ).then (stories) ->
+        #ids = model.mapProperty('id')
+        #stories = stories.reject (s) -> ids.contains(s.get 'id')
+        model.addObjects(stories)
 
 `export default R`
