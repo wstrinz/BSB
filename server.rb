@@ -39,7 +39,7 @@ configure do
   if File.exist? 'secrets.yml'
     ApiKeys.load YAML.load open('secrets.yml').read
   else
-    logger.info 'No secrets.yml found, some integrations may be unavailable'
+    puts 'No secrets.yml found, some integrations may be unavailable'
   end
 end
 
