@@ -6,13 +6,13 @@ V = Ember.View.extend
 
   gestures:
     swipeLeft: (e) ->
-      e.gesture.stopDetect()
-      e.gesture.preventDefault()
+      #e.gesture.stopDetect()
+      #e.gesture.preventDefault()
       @controller.send('nextItem')
 
     swipeRight: (e) ->
-      e.gesture.stopDetect()
-      e.gesture.preventDefault()
+      #e.gesture.stopDetect()
+      #e.gesture.preventDefault()
       @controller.send('prevItem')
 
 `export default V`

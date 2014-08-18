@@ -60,13 +60,8 @@ R = Ember.Route.extend
       @storyAt(-1).then (s) ->
         r.transitionTo 'stories.show', s.get('id')
 
-    toggleShowInIframe: -> @controller.set('showInIframe', !@controller.get('showInIframe'))
-
-    toggleSandboxIframe: ->
-      if @controller.get('sandboxIframe')
-        @controller.set('sandboxIframe', false)
-      else
-        @controller.set('sandboxIframe', true)
+    toggleShowInIframe: -> @controller.set 'showInIframe', !@controller.get('showInIframe')
+    toggleSandboxIframe: -> @controller.set 'sandboxIframe', !@controller.get('sandboxIframe')
 
     backToFeed: ->
       id = @controller.get('model.feed.id')

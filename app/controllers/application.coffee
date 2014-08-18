@@ -9,7 +9,12 @@ C = Ember.Controller.extend
       'sharecount'
     else
       'timestamp'
-  unreadButtonsInIndex: false
+  isMobile: Ember.computed ->
+    typeof(window.orientation) != 'undefined'
+
+  unreadButtonsInIndex: Ember.computed 'isMobile', ->
+    @get 'isMobile'
+
   showRead: false
 
 `export default C`
