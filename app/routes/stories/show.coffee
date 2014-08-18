@@ -43,11 +43,7 @@ R = Ember.Route.extend
   actions:
     toggleRead: ->
       mod = @controller.get 'model'
-      if mod.get 'read'
-        mod.set 'read', false
-      else
-        mod.set 'read', true
-
+      mod.set 'read', !mod.get('read')
       mod.save()
 
     nextItem: ->

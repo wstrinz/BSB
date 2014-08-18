@@ -66,11 +66,13 @@ C = Ember.ArrayController.extend
 
     toggleRead: (id) ->
       @store.find('story',id).then((s) ->
-        if s.get('read')
-          s.set 'read', false
-        else
-          s.set 'read', true
-        s.save())
+        s.set 'marking', Ember.run.later(this, ->
+          s.set 'read', !s.get('read')
+          s.save()
+          s.set 'marking', null
+          alert('donemark')
+        , 1000)
+      )
 
     resetFocus: (force) ->
       model = @get('model')
@@ -115,13 +117,15 @@ C = Ember.ArrayController.extend
 
     toggleCurrentRead: ->
       current = @get 'currentStory'
-
-      if current.get('read')
-        current.set('read', false)
+      if current.get 'marking'
+        Ember.run.cancel current.get('marking')
       else
-        current.set('read', true)
+        current.set 'marking', Ember.run.later(this, ->
+          current.set 'read', !current.get('read')
+          current.save()
+          current.set 'marking', null
+        , 3500)
 
-      current.save()
       @send 'nextItem'
 
     loadNextPage: ->
