@@ -80,7 +80,7 @@ C = Ember.ArrayController.extend
 
       currentFeed = model.content[0].get('feed.id')
       target = stories[0]
-      if target && force || (!@get('focusedStory') || @get('feed') != currentFeed)
+      if target && (force || (!@get('focusedStory') || @get('feed') != currentFeed))
         if current
           current.set('focused', false)
         target.set('focused', true)
