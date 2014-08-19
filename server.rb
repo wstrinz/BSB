@@ -61,6 +61,7 @@ get '/stories' do
   content_type :json
   query_opts = {}
   query_opts[:id] = params[:ids] if params[:ids]
+  query_opts[:feed_id] = params[:feed_id] if params[:feed_id]
   query_opts[:read] = (params[:read] == "true") if params[:read]
   order = params[:sort] if params[:sort]
   page = params[:page] || 1

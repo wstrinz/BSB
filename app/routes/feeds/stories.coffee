@@ -1,8 +1,12 @@
 `import Ember from 'ember'`
 
 R = Ember.Route.extend
-  model: (params) -> @store.find('feed', params.feed_id).then(
-    (f) -> f.get('stories'))
+  model: (params) ->
+    appcon = @controllerFor('application')
+    @store.find 'story',
+      feed_id: params.feed_id
+      read: appcon.get('showRead')
+      sort: appcon.get('storySort')
 
   setupController: (controller, model) ->
     controller.set 'model', model
