@@ -3,7 +3,7 @@
 C = Ember.Controller.extend
   storySort: 'sharecount'
   sortMethod: Ember.computed 'storySort', ->
-    [@get 'storySort']
+    [@get 'storySort', 'id']
   nextSort: Ember.computed 'storySort', ->
     if @get('storySort') == 'timestamp'
       'sharecount'

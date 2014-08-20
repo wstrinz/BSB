@@ -28,32 +28,15 @@ C = Ember.ArrayController.extend
       story.get('read') == false
 
   storyAt: (offset) ->
+    ## this still doesn't take showRead into account
     current = @get 'currentStory'
     model = @get 'model'
     sortMethod = @get 'controllers.application.storySort'
     showRead = @get 'showReadStories'
 
-    stories = model.filter((s) ->
-      incl = true
-      unless showRead
-        incl = incl && !s.get('read')
-
-      if offset > 0
-         incl = incl && s.get(sortMethod) < current.get(sortMethod)
-      else
-         incl = incl && s.get(sortMethod) > current.get(sortMethod)
-
-      incl
-    ).sortBy(sortMethod, 'id').reverse()
-
-    if offset > 0
-      if stories.length < 3
-        @send('loadNextPage')
-
-      stories[offset - 1]
-    else
-      stories[stories.length + offset]
-
+    i = model.indexOf(current)
+    length = model.get('length')
+    model.get('arrangedContent')[i + offset]
 
   actions:
     toggleShowRead: ->
