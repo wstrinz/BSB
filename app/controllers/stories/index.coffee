@@ -30,13 +30,16 @@ C = Ember.ArrayController.extend
   storyAt: (offset) ->
     ## this still doesn't take showRead into account
     current = @get 'currentStory'
-    model = @get 'model'
+    model_content = @get 'model.arrangedContent'
     sortMethod = @get 'controllers.application.storySort'
     showRead = @get 'showReadStories'
 
-    i = model.indexOf(current)
-    length = model.get('length')
-    model.get('arrangedContent')[i + offset]
+    unless showRead
+      model_content = model_content.filter (c) -> c.get('read') == false
+
+    i = model_content.indexOf(current)
+    length = model_content.length
+    model_content[i + offset]
 
   actions:
     toggleShowRead: ->
