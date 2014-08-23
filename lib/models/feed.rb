@@ -21,4 +21,9 @@ class Feed < ActiveRecord::Base
     end
     logger.info "Feed #{name} updated #{update_count} stories"
   end
+
+  def update_stats
+    self.unread_count = stories.where(read: false).count
+    self.save
+  end
 end

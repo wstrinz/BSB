@@ -5,7 +5,7 @@
 <ul>
   {{#each}}
   <li>
-    {{#link-to 'feeds.stories' id}}{{name}}{{/link-to}}
+  {{#link-to 'feeds.stories' id}}{{name}} ({{unread_count}}){{/link-to}}
   </li>
   {{/each}}
 </ul>

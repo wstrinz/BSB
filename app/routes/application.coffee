@@ -3,11 +3,15 @@
 R = Ember.Route.extend
   shortcuts:
     'j': 'nextItem'
+    'x': 'nextItem'
     'k': 'prevItem'
+    'z': 'prevItem'
     'c': 'viewItem'
+    'o': 'viewItem'
     'm': 'toggleCurrentRead'
     'u': 'toggleCurrentRead'
     'f': 'backToFeed'
+    'r': 'resetFocus'
     'shift+f': 'backToHome'
     'shift+s': 'backToStories'
 

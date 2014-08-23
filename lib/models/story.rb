@@ -1,5 +1,6 @@
 class Story < ActiveRecord::Base
   belongs_to :feed
+  after_save :update_feed_stats
 
   def self.from_entry(e)
     model_only = %w{id feed_id story_content fetched_at timestamp read}
@@ -45,5 +46,9 @@ class Story < ActiveRecord::Base
       self.updated_at = Time.now
       save!
     end
+  end
+
+  def update_feed_stats
+    feed.update_stats
   end
 end
