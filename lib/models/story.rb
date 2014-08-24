@@ -49,6 +49,6 @@ class Story < ActiveRecord::Base
   end
 
   def update_feed_stats
-    feed.update_stats
+    feed.update_stats if feed
   end
 end

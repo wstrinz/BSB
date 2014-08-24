@@ -14,20 +14,6 @@ M = Ember.Mixin.create
     length = model_content.length
     model_content[i + offset]
 
-  nextItem: ->
-    next = @storyAt(1)
-    if next
-      @get('currentStory').set('focused', false)
-      @set('focusedStory', next)
-      next.set('focused', true)
-
-  prevItem: ->
-    prev = @storyAt(-1)
-    if prev
-      @get('currentStory').set('focused', false)
-      @set('focusedStory', prev)
-      prev.set('focused', true)
-
   currentStory: Ember.computed 'focusedStory', ->
     current = @get('focusedStory')
 
@@ -37,21 +23,38 @@ M = Ember.Mixin.create
 
     current
 
-  resetFocus: (force) ->
-    model = @get 'model'
-    current = @get 'focusedStory'
+  actions:
+    nextItem: ->
+      debugger
+      next = @storyAt(1)
+      if next
+        @get('currentStory').set('focused', false)
+        @set('focusedStory', next)
+        next.set('focused', true)
 
-    stories = model.sortBy(@get 'storySort').reverse()
+    prevItem: ->
+      prev = @storyAt(-1)
+      if prev
+        @get('currentStory').set('focused', false)
+        @set('focusedStory', prev)
+        prev.set('focused', true)
 
-    unless @get 'showRead'
-      stories = stories.filter((m) -> m.get('read') == false)
 
-    currentFeed = model.content[0].get 'feed.id'
-    target = stories[0]
-    if target && (force || (!@get('focusedStory') || @get('feed') != currentFeed))
-      if current
-        current.set('focused', false)
-      target.set('focused', true)
-      @set('feed', currentFeed)
-      @set('focusedStory', target)
+    resetFocus: (force) ->
+      model = @get 'model'
+      current = @get 'focusedStory'
+
+      stories = model.sortBy(@get 'storySort').reverse()
+
+      unless @get 'showRead'
+        stories = stories.filter((m) -> m.get('read') == false)
+
+      currentFeed = model.content[0].get 'feed.id'
+      target = stories[0]
+      if target && (force || (!@get('focusedStory') || @get('feed') != currentFeed))
+        if current
+          current.set('focused', false)
+        target.set('focused', true)
+        @set('feed', currentFeed)
+        @set('focusedStory', target)
 `export default M`
