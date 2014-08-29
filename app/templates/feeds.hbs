@@ -1,0 +1,20 @@
+<div class='container-fluid'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <input id="add_feed"/>
+      <button {{action 'add_feed'}}>Add feed</button>
+      <div>{{#link-to 'feeds.all'}}All Stories{{/link-to}}</div>
+      <div><h3>Feeds</h3></div>
+      <ul>
+        {{#each}}
+        <li>
+        {{#link-to 'feeds.stories' id}}{{name}} ({{unread_count}}){{/link-to}}
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class='col-md-9'>
+      {{outlet}}
+    </div>
+  </div>
+</div>

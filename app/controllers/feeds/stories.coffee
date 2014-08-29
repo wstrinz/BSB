@@ -57,7 +57,7 @@ C = Ember.ArrayController.extend NextPrev,
       current = @get 'currentStory'
 
       @send 'nextItem'
-      @transitionToRoute 'stories.show', current.get('id')
+      @transitionToRoute 'feeds.story', current.get('id')
 
     toggleCurrentRead: ->
       current = @get 'currentStory'

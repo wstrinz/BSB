@@ -1,5 +1,5 @@
 <li {{bind-attr class="story.focused"}}>
-<div>{{#link-to 'stories.show' story.id}}{{story.title}}{{/link-to}}</div>
+<div>{{#link-to 'feeds.story' story.id}}{{story.title}}{{/link-to}}</div>
 {{#if story.focused}}
   <div class='container-fluid'>
     <div class='row story-summary-info'>

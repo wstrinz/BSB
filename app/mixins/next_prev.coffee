@@ -25,7 +25,6 @@ M = Ember.Mixin.create
 
   actions:
     nextItem: ->
-      debugger
       next = @storyAt(1)
       if next
         @get('currentStory').set('focused', false)
@@ -38,7 +37,6 @@ M = Ember.Mixin.create
         @get('currentStory').set('focused', false)
         @set('focusedStory', prev)
         prev.set('focused', true)
-
 
     resetFocus: (force) ->
       model = @get 'model'
