@@ -17,4 +17,5 @@ C = Ember.Controller.extend
 
   showRead: false
 
+
 `export default C`

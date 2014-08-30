@@ -7,6 +7,7 @@ C = Ember.ArrayController.extend NextPrev,
   sortAscending: false
   storySort: Ember.computed.alias 'controllers.application.storySort'
   feed: Ember.computed 'model', -> @get('model').content[0].get('feed')
+  showRead: Ember.computed.alias 'controllers.application.showRead'
 
   showReadStories: Ember.computed 'showRead', ->
     su = @get 'showRead'
@@ -26,33 +27,6 @@ C = Ember.ArrayController.extend NextPrev,
       @get('feed').unread_count
 
   actions:
-    toggleShowRead: ->
-      su = @get 'showRead'
-      if su == undefined || su == true
-        @set 'showRead', false
-      else
-        @set 'showRead', true
-      null
-
-    cycleSort: ->
-      @set 'controllers.application.storySort', @get('controllers.application.nextSort')
-      @send 'resetFocus', true
-
-
-    #nextItem: ->
-      #next = @storyAt 1
-      #if next
-        #next.set 'focused', true
-        #@get('currentStory').set 'focused', false
-        #@set 'focusedStory', next
-
-    #prevItem: ->
-      #prev = @storyAt -1
-      #if prev
-        #prev.set 'focused', true
-        #@get('currentStory').set 'focused', false
-        #@set 'focusedStory', prev
-
     viewItem: ->
       current = @get 'currentStory'
 

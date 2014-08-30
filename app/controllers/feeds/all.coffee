@@ -59,7 +59,7 @@ C = Ember.ArrayController.extend NextPrev,
       current = @get 'currentStory'
 
       @send 'nextItem'
-      @transitionToRoute 'feeds.story', current.get('id')
+      @transitionToRoute 'story', current.get('id')
 
     cycleSort: ->
       @set('controllers.application.storySort', @get('controllers.application.nextSort'))

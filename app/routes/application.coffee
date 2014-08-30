@@ -19,4 +19,5 @@ R = Ember.Route.extend
     backToHome: -> @transitionTo('feeds.index')
     backToStories: -> @transitionTo('stories.index')
 
+
 `export default R`

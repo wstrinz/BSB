@@ -5,7 +5,7 @@
         {{#if story.read}}●{{else}}○{{/if}}
       </button>
     {{/if}}
-    {{#link-to 'feeds.story' story.id}}{{story.title}} - {{story.feed.name}}{{/link-to}}
+    <a {{action 'focusStory' story.id}}>{{story.title}} - {{story.feed.name}}</a>
   </div>
   {{#if story.focused}}
   <div class='container-fluid'>

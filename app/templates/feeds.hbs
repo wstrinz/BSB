@@ -1,14 +1,16 @@
 <div class='container-fluid'>
   <div class='row'>
-    <div class='col-md-3'>
+    <div class='col-md-2'>
       <input id="add_feed"/>
       <button {{action 'add_feed'}}>Add feed</button>
+      <p>Show Read: <button {{action toggleShowRead}}>{{controllers.application.showRead}}</button></p>
+      <p>Sort: <button {{action cycleSort}}>{{controllers.application.storySort}}</button></p>
       <div>{{#link-to 'feeds.all'}}All Stories{{/link-to}}</div>
       <div><h3>Feeds</h3></div>
       <ul>
         {{#each}}
         <li>
-        {{#link-to 'feeds.stories' id}}{{name}} ({{unread_count}}){{/link-to}}
+        {{#link-to 'stories' id}}({{unread_count}}) {{name}}{{/link-to}}
         </li>
         {{/each}}
       </ul>
