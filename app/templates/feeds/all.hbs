@@ -1,13 +1,5 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-1">
-      <button {{action toggleShowRead}}>{{#if showReadStories}}All{{else}}Unread{{/if}}</button>
-    </div>
-    <div class="col-md-1">
-      <button {{action cycleSort}}>{{controllers.application.storySort}}</button>
-    </div>
-  </div>
-  <div class="row">
     {{#if showReadStories}}
       {{#each story in model}}
         {{partial 'stories/story-small'}}

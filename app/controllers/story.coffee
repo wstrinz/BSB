@@ -1,7 +1,8 @@
 `import Ember from 'ember'`
 
 C = Ember.ObjectController.extend
-  showInIframe: false
+  needs: ['application']
+  showInIframe: Ember.computed.alias('controllers.application.showInIframe')
   sandboxIframe: false
 
 `export default C`

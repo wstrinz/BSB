@@ -16,6 +16,7 @@ C = Ember.Controller.extend
     @get 'isMobile'
 
   showRead: false
+  showInIframe: false
 
 
 `export default C`

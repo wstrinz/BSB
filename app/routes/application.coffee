@@ -12,6 +12,8 @@ R = Ember.Route.extend
     'u': 'toggleCurrentRead'
     'f': 'backToFeed'
     'r': 'resetFocus'
+    'p': 'toggleShowInIframe'
+    's': 'toggleSandboxIframe'
     'shift+f': 'backToHome'
     'shift+s': 'backToStories'
 

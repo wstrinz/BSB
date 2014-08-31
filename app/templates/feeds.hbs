@@ -1,6 +1,9 @@
 <div class='container-fluid'>
   <div class='row'>
-    <div class='col-md-2'>
+    <button {{action 'toggleSidebar'}}>
+      {{#if showFeeds}}&lt;--{{else}}--&gt;{{/if}}
+    </button>
+    <div {{bind-attr class='showFeeds:col-md-3:hidden'}}>
       <input id="add_feed"/>
       <button {{action 'add_feed'}}>Add feed</button>
       <p>Show Read: <button {{action toggleShowRead}}>{{controllers.application.showRead}}</button></p>
@@ -15,7 +18,7 @@
         {{/each}}
       </ul>
     </div>
-    <div class='col-md-9'>
+    <div {{bind-attr class='showFeeds:col-md-9:col-md-12'}}>
       {{outlet}}
     </div>
   </div>

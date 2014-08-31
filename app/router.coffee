@@ -5,7 +5,8 @@ Router = Ember.Router.extend
 
 Router.map ->
   @resource 'feeds', ->
-    @resource 'stories', { path: '/:feed_id' }
+    @resource 'stories', { path: '/:feed_id' }, ->
+      @route 'story'
     @route 'all'
 
   #@resource('stories', ->

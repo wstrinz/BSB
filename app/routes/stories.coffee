@@ -17,5 +17,9 @@ R = Ember.Route.extend
     nextItem: -> @controller.send('nextItem')
     viewItem: -> @controller.send('viewItem')
     toggleCurrentRead: -> @controller.send('toggleCurrentRead')
+    toggleShowInIframe: ->
+      c = @controllerFor('application')
+      c.set 'showInIframe', !c.get('showInIframe')
+    toggleSandboxIframe: -> @set 'sandboxIframe', !@get('sandboxIframe')
 
 `export default R`

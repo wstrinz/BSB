@@ -8,14 +8,19 @@ C = Ember.ArrayController.extend
     url = Ember.$('#add_feed').val()
     new_feed = @store.createRecord 'feed', {feed_url: url, name: 'temp'}
     new_feed.save()
+  showFeeds: true
 
   actions:
     toggleShowRead: ->
       @set 'controllers.application.showRead', !@get('controllers.application.showRead')
       false
 
+
     cycleSort: ->
       @set 'controllers.application.storySort', @get('controllers.application.nextSort')
       @get('controllers.stories').send 'resetFocus', true
+
+    toggleSidebar: ->
+      @set 'showFeeds', !@get('showFeeds')
 
 `export default C`
