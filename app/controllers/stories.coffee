@@ -31,17 +31,19 @@ C = Ember.ArrayController.extend NextPrev,
       current = @get 'currentStory'
 
       @send 'nextItem'
-      @transitionToRoute 'feeds.story', current.get('id')
+      window.open current.get('url'), '_blank'
 
     toggleCurrentRead: ->
       current = @get 'currentStory'
-
-      if current.get('read')
-        current.set('read', false)
+      if current.get 'marking'
+        Ember.run.cancel current.get('marking')
       else
-        current.set('read', true)
+        current.set 'marking', Ember.run.later(this, ->
+          current.set 'read', !current.get('read')
+          current.save()
+          current.set 'marking', null
+        , 3500)
 
-      current.save()
       @send 'nextItem'
 
 `export default C`

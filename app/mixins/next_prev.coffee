@@ -38,11 +38,22 @@ M = Ember.Mixin.create
         @set('focusedStory', prev)
         prev.set('focused', true)
 
-    focusStory: (id) ->
-      selected = @get('model').find (s) -> s.get('id') == id
+    focusStory: (story) ->
       @get('currentStory').set('focused', false)
-      @set('focusedStory', selected)
-      selected.set('focused', true)
+      @set('focusedStory', story)
+      story.set('focused', true)
+
+    toggleFocus: (story) ->
+      current = @get('currentStory')
+      if current && current != story
+        current.set('focused', false)
+
+      if story.get('focused')
+        story.set('focused', false)
+        @set('focusedStory', null)
+      else
+        story.set('focused', true)
+        @set('focusedStory', story)
 
     resetFocus: (force) ->
       model = @get 'model'
