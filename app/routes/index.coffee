@@ -2,6 +2,6 @@
 
 R = Ember.Route.extend
   redirect: ->
-   @transitionTo('feeds')
+   @transitionTo 'feeds.all'
 
 `export default R`
