@@ -58,8 +58,7 @@ C = Ember.ArrayController.extend NextPrev,
     viewItem: ->
       current = @get 'currentStory'
 
-      @send 'nextItem'
-      @transitionToRoute 'story', current.get('id')
+      window.open current.get('url'), '_blank'
 
     cycleSort: ->
       @set('controllers.application.storySort', @get('controllers.application.nextSort'))

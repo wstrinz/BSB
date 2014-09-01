@@ -30,7 +30,6 @@ C = Ember.ArrayController.extend NextPrev,
     viewItem: ->
       current = @get 'currentStory'
 
-      @send 'nextItem'
       window.open current.get('url'), '_blank'
 
     toggleCurrentRead: ->
