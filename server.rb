@@ -19,6 +19,8 @@ require path_to('lib/models/feeds/hacker_news')
 require_relative 'lib/routes_helper'
 include RoutesHelper
 
+use Rack::Deflater
+
 class ApiKeys
   class << self
     attr_writer :keys

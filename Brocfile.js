@@ -18,11 +18,11 @@ var app = new EmberApp();
 // along with the exports of each module as its value.
 
 app.import('vendor/ember-shortcuts/ember-shortcuts.js');
-app.import('vendor/moment/moment.js');
-app.import('vendor/hammerjs/hammer.js');
+app.import('vendor/moment/min/moment.min.js');
+app.import('vendor/hammerjs/hammer.min.js');
 app.import('vendor/ember-hammer/ember-hammer.js');
-app.import('vendor/bootstrap/dist/js/bootstrap.js');
-app.import('vendor/bootstrap/dist/css/bootstrap.css');
-app.import('vendor/bootstrap/dist/css/bootstrap-theme.css');
+app.import('vendor/bootstrap/dist/js/bootstrap.min.js');
+app.import('vendor/bootstrap/dist/css/bootstrap.min.css');
+app.import('vendor/bootstrap/dist/css/bootstrap-theme.min.css');
 
 module.exports = app.toTree();
