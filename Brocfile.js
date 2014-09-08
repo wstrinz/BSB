@@ -17,12 +17,12 @@ var app = new EmberApp();
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
 
-app.import('vendor/ember-shortcuts/ember-shortcuts.js');
-app.import('vendor/moment/min/moment.min.js');
-app.import('vendor/hammerjs/hammer.min.js');
-app.import('vendor/ember-hammer/ember-hammer.js');
-app.import('vendor/bootstrap/dist/js/bootstrap.min.js');
-app.import('vendor/bootstrap/dist/css/bootstrap.min.css');
-app.import('vendor/bootstrap/dist/css/bootstrap-theme.min.css');
+app.import('bower_components/ember-shortcuts/ember-shortcuts.js');
+app.import('bower_components/moment/min/moment.min.js');
+app.import('bower_components/hammerjs/hammer.min.js');
+app.import('bower_components/ember-hammer/ember-hammer.js');
+app.import('bower_components/bootstrap/dist/js/bootstrap.min.js');
+app.import('bower_components/bootstrap/dist/css/bootstrap.min.css');
+app.import('bower_components/bootstrap/dist/css/bootstrap-theme.min.css');
 
 module.exports = app.toTree();
