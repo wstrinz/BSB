@@ -8,6 +8,7 @@ R = Ember.Route.extend
     'z': 'prevItem'
     'c': 'viewItem'
     'o': 'viewItem'
+    'shift+o': 'viewAndMarkItem'
     'm': 'toggleCurrentRead'
     'u': 'toggleCurrentRead'
     'f': 'backToFeed'

@@ -17,6 +17,9 @@ R = Ember.Route.extend
     nextItem: -> @controller.send('nextItem')
     viewItem: -> @controller.send('viewItem')
     toggleCurrentRead: -> @controller.send('toggleCurrentRead')
+    viewAndMarkItem: ->
+      @controller.send('viewItem')
+      @controller.send('toggleCurrentRead')
     toggleShowInIframe: ->
       c = @controllerFor('application')
       c.set 'showInIframe', !c.get('showInIframe')
