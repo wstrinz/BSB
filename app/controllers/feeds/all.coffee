@@ -60,6 +60,18 @@ C = Ember.ArrayController.extend NextPrev,
 
       window.open current.get('url'), '_blank'
 
+    viewInBackground: ->
+      current = @get 'currentStory'
+
+      a = document.createElement("a")
+      a.href = current.get('url')
+      evt = document.createEvent("MouseEvents")
+
+      evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0,
+                                true, false, false, true, 0, null)
+      a.dispatchEvent(evt)
+      false
+
     cycleSort: ->
       @set('controllers.application.storySort', @get('controllers.application.nextSort'))
       @send('resetFocus', true)
