@@ -4,6 +4,11 @@ class Feed < ActiveRecord::Base
   def update
     f = Feedjira::Feed.fetch_and_parse self.feed_url
 
+    unless f.class.parent == Feedjira::Parser
+      logger.info "Error fetching feed for #{self.feed_url}"
+      return
+    end
+
     if self.name != f.title
       self.name = f.title
       self.save
