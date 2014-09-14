@@ -34,7 +34,6 @@ C = Ember.ArrayController.extend NextPrev,
           s.set 'read', !s.get('read')
           s.save()
           s.set 'marking', null
-          alert('donemark')
         , 1000)
       )
 
@@ -85,6 +84,7 @@ C = Ember.ArrayController.extend NextPrev,
           current.set 'read', !current.get('read')
           current.save()
           current.set 'marking', null
+          current.get('feed').set('unread_count', current.get('feed.unread_count') - 1)
         , 3500)
 
       @send 'nextItem'

@@ -9,6 +9,11 @@ C = Ember.ArrayController.extend
     new_feed = @store.createRecord 'feed', {feed_url: url, name: 'temp'}
     new_feed.save()
   showFeeds: true
+  unreadCount: Ember.computed '@each.unread_count', ->
+    @model.reduce (prev, feed) ->
+      prev + feed.get('unread_count')
+    , 0
+
 
   actions:
     toggleShowRead: ->

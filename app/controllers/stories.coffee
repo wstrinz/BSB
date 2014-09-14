@@ -53,6 +53,7 @@ C = Ember.ArrayController.extend NextPrev,
           current.set 'read', !current.get('read')
           current.save()
           current.set 'marking', null
+          current.get('feed').set('unread_count', current.get('feed.unread_count') - 1)
         , 3500)
 
       @send 'nextItem'
