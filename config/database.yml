@@ -1,6 +1,8 @@
 development:
-  adapter: sqlite3
-  database: feed-ember.db
+  adapter: postgresql
+  database: bsb_development
+  username: bsb
+  password:
 
 test:
   adapter: sqlite3
