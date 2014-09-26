@@ -1,0 +1,20 @@
+<div class='container-fluid'>
+  {{partial 'stories/story-header'}}
+  <div class='row'>
+    <div class='col-md-12'>
+      {{#if showInIframe}}
+        {{#if sandboxIframe}}
+        <iframe sandbox {{bind-attr src=url}}></iframe>
+        {{else}}
+        <iframe seamless {{bind-attr src=url}}></iframe>
+        {{/if}}
+      {{else}}
+        {{#if story_content}}
+          {{{story_content}}}
+        {{else}}
+          {{{summary}}}
+        {{/if}}
+      {{/if}}
+    </div>
+  </div>
+</div>

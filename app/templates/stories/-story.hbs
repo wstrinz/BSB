@@ -1,20 +1,21 @@
-<div class='container-fluid'>
-  {{partial 'stories/story-header'}}
-  <div class='row'>
-    <div class='col-md-12'>
-      {{#if showInIframe}}
-        {{#if sandboxIframe}}
-        <iframe sandbox {{bind-attr src=url}}></iframe>
-        {{else}}
-        <iframe seamless {{bind-attr src=url}}></iframe>
-        {{/if}}
-      {{else}}
-        {{#if story_content}}
-          {{{story_content}}}
-        {{else}}
-          {{{summary}}}
-        {{/if}}
-      {{/if}}
+<li {{bind-attr class="story.focused"}}>
+  <div>
+    {{#if controllers.application.unreadButtonsInIndex}}
+      <button {{action 'toggleRead' story.id}}>
+        {{#if story.read}}●{{else}}○{{/if}}
+      </button>
+    {{/if}}
+    <a {{bind-attr href="story.url"}} {{action 'toggleFocus' story}}>{{story.title}} - {{story.feed.name}}</a>
+  </div>
+  {{#if story.focused}}
+  <div class='container-fluid'>
+    <div class='row story-summary-info'>
+      <div class='col-md-6'>{{story.author}} -- {{story.human_time}}</div>
+      <div class='col-md-1'>{{story.sharecount}}</div>
+    </div>
+    <div class='row story-summary'>
+      <div class='col-md-12'>{{partial 'stories/story-details'}}</div>
     </div>
   </div>
-</div>
+  {{/if}}
+</li>

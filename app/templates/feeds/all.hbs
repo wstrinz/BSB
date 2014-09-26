@@ -2,11 +2,11 @@
   <div class="row">
     {{#if showReadStories}}
       {{#each story in model}}
-        {{partial 'stories/story-small'}}
+        {{render 'story' story}}
       {{/each}}
     {{else}}
       {{#each story in unreadStories}}
-        {{partial 'stories/story-small'}}
+        {{render 'story' story}}
       {{/each}}
     {{/if}}
   </div>
