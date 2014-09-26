@@ -1,4 +1,7 @@
 <div class="container-fluid">
+  <div class="hidden">
+    {{storiesLeft}}
+  </div>
   <div class="row">
     {{#if showReadStories}}
       {{#each story in model}}
@@ -11,6 +14,6 @@
     {{/if}}
   </div>
   <div class="row">
-    <button {{action loadNextPage}}>Next</button>
+    <button {{action 'loadNextPage'}}>Next</button>
   </div>
 </div>

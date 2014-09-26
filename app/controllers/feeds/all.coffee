@@ -1,11 +1,11 @@
 `import Ember from 'ember'`
 `import NextPrev from 'feed-ember/mixins/next_prev'`
+`import Paginates from 'feed-ember/mixins/paginates'`
 
-C = Ember.ArrayController.extend NextPrev,
+C = Ember.ArrayController.extend NextPrev, Paginates,
   needs: ['application']
   sortProperties: Ember.computed.alias 'controllers.application.sortMethod'
   sortAscending: false,
-  page: 1
 
   showReadStories: Ember.computed 'showRead', ->
     su = @get 'showRead'
@@ -88,9 +88,5 @@ C = Ember.ArrayController.extend NextPrev,
         , 3500)
 
       @send 'nextItem'
-
-    loadNextPage: ->
-      @set('page', @get('page') + 1)
-      @send('reload')
 
 `export default C`
