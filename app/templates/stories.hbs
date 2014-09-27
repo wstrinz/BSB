@@ -2,11 +2,11 @@
 <ul>
 {{#if showReadStories}}
   {{#each story in model}}
-    {{partial 'feeds/feed-story-small'}}
+    {{render 'story' story}}
   {{/each}}
 {{else}}
   {{#each story in unreadStories}}
-    {{partial 'feeds/feed-story-small'}}
+    {{render 'story' story}}
   {{/each}}
 {{/if}}
 </ul>

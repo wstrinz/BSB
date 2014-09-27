@@ -1,7 +1,7 @@
 `import Ember from 'ember'`
 
 M = Ember.Mixin.create
-  paginateAt: 6
+  paginateAt: 8
   page: 1
 
   storiesLeft: Ember.computed 'focusedStory', ->
