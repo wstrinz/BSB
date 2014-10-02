@@ -1,7 +1,8 @@
 `import Ember from 'ember'`
 `import NextPrev from 'feed-ember/mixins/next_prev'`
+`import Paginates from 'feed-ember/mixins/paginates'`
 
-C = Ember.ArrayController.extend NextPrev,
+C = Ember.ArrayController.extend NextPrev, Paginates,
   needs: ['application']
   sortProperties: Ember.computed.alias 'controllers.application.sortMethod'
   sortAscending: false

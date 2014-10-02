@@ -1,4 +1,7 @@
 <a target="_blank" {{bind-attr href="feed_url"}}>{{feed_url}}</a>
+<div class="hidden">
+  {{storiesLeft}}
+</div>
 <ul>
 {{#if showReadStories}}
   {{#each story in model}}
