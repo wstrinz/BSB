@@ -19,7 +19,7 @@ R = Ember.Route.extend
     'shift+s': 'backToStories'
 
   actions:
-    backToHome: -> @transitionTo('feeds.index')
+    backToHome: -> @transitionTo('feeds')
     backToStories: -> @transitionTo('stories.index')
 
 

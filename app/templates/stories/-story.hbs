@@ -1,21 +1,17 @@
-<li {{bind-attr class="story.focused"}}>
-  <div>
-    {{#if controllers.application.unreadButtonsInIndex}}
-      <button {{action 'toggleRead' story.id}}>
-        {{#if story.read}}●{{else}}○{{/if}}
-      </button>
-    {{/if}}
-    <a {{bind-attr href="story.url"}} {{action 'toggleFocus' story}}>{{story.title}} - {{story.feed.name}}</a>
-  </div>
-  {{#if story.focused}}
-  <div class='container-fluid'>
-    <div class='row story-summary-info'>
-      <div class='col-md-6'>{{story.author}} -- {{story.human_time}}</div>
-      <div class='col-md-1'>{{story.sharecount}}</div>
-    </div>
-    <div class='row story-summary'>
-      <div class='col-md-12'>{{partial 'stories/story-details'}}</div>
-    </div>
-  </div>
+<div>
+  {{#if controllers.application.unreadButtonsInIndex}}
+  <button {{action 'toggleRead' id}}>
+    {{#if read}}●{{else}}○{{/if}}
+  </button>
   {{/if}}
-</li>
+  <a {{bind-attr href="url"}} {{action 'toggleFocus' story}}>{{title}} - {{feed.name}}</a>
+</div>
+<div class='container-fluid'>
+  <div class='row story-summary-info'>
+    <div class='col-md-6'>{{author}} -- {{human_time}}</div>
+    <div class='col-md-1'>{{sharecount}}</div>
+  </div>
+  <div class='row story-summary'>
+    <div class='col-md-12'>{{partial 'stories/story-details'}}</div>
+  </div>
+</div>

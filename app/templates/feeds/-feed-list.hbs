@@ -1,0 +1,8 @@
+<div><h3>Feeds</h3></div>
+<ul>
+  {{#each}}
+  <li>
+  {{#link-to 'feed' id}}({{unread_count}}) {{name}}{{/link-to}}
+  </li>
+  {{/each}}
+</ul>

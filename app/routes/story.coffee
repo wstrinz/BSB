@@ -46,16 +46,16 @@ R = Ember.Route.extend
     nextItem: ->
       r = this
       @storyAt(1).then (s) ->
-        r.transitionTo 'stories.show', s.get('id')
+        r.transitionTo 'story', s.get('id')
 
     prevItem: ->
       r = this
       @storyAt(-1).then (s) ->
-        r.transitionTo 'stories.show', s.get('id')
+        r.transitionTo 'story', s.get('id')
 
 
     backToFeed: ->
       id = @controller.get('model.feed.id')
-      @transitionTo('stories', id)
+      @transitionTo('feed', id)
 
 `export default R`

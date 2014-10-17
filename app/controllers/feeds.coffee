@@ -1,7 +1,7 @@
 `import Ember from 'ember'`
 
 C = Ember.ArrayController.extend
-  needs: ['application', 'stories']
+  needs: ['application', 'feed']
   sortProperties: ['name'],
   sortAscending: true,
   add_feed: ->
@@ -23,7 +23,7 @@ C = Ember.ArrayController.extend
 
     cycleSort: ->
       @set 'controllers.application.storySort', @get('controllers.application.nextSort')
-      @get('controllers.stories').send 'resetFocus', true
+      @get('controllers.feed').send 'resetFocus', true
 
     toggleSidebar: ->
       @set 'showFeeds', !@get('showFeeds')

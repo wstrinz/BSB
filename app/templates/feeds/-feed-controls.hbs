@@ -1,0 +1,5 @@
+<input id="add_feed"/>
+<button {{action 'add_feed'}}>Add feed</button>
+<p>Show Read: <button {{action 'toggleShowRead'}}>{{controllers.application.showRead}}</button></p>
+<p>Sort: <button {{action 'cycleSort'}}>{{controllers.application.storySort}}</button></p>
+<div>{{#link-to 'feeds'}}All Feeds{{/link-to}}</div>

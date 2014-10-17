@@ -59,4 +59,11 @@ C = Ember.ArrayController.extend NextPrev, Paginates,
 
       @send 'nextItem'
 
+    toggleShowRead: ->
+      @set 'controllers.application.showRead', !@get('controllers.application.showRead')
+      false
+
+    toggleSidebar: ->
+      @set 'showFeeds', !@get('showFeeds')
+
 `export default C`
