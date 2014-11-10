@@ -11,16 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140823223803) do
+ActiveRecord::Schema.define(version: 20141110171530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "feeds", force: true do |t|
-    t.string  "name",         null: false
-    t.string  "feed_url",     null: false
+    t.string  "name",                         null: false
+    t.string  "feed_url",                     null: false
     t.string  "type"
     t.integer "unread_count"
+    t.boolean "time_decay",   default: false, null: false
   end
 
   create_table "stories", force: true do |t|
