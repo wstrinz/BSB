@@ -23,6 +23,7 @@ class HackerNewsFeed < Feed
       s.fetched_at = t
       s.timestamp = s.published
       s.update_sharecount
+      s.recompute_score
       s.save
     end
   end

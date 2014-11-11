@@ -22,6 +22,8 @@ class Feed < ActiveRecord::Base
         s.feed = self
         s.save
         s.update_sharecount
+        s.recompute_score
+        s.save
       end
     end
     logger.info "Feed #{name} updated #{update_count} stories"

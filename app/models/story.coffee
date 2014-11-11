@@ -12,6 +12,7 @@ Story = DS.Model.extend
   summary: DS.attr 'string'
   story_content: DS.attr 'string'
   sharecount: DS.attr 'number'
+  score: DS.attr 'number'
   feed: DS.belongsTo 'feed'
   human_time: Ember.computed 'timestamp', ->
     moment(@get 'timestamp').format 'LLL'

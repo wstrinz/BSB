@@ -18,3 +18,11 @@ desc "Refresh share counts"
 task :refresh_sharecounts do
   Story.refresh_sharecounts
 end
+
+desc "Refresh share counts"
+task :recompute_scores do
+  Story.all.each do |s|
+    s.recompute_score
+    s.save!
+  end
+end

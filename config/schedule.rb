@@ -23,4 +23,5 @@ set :output, 'feed_updates.log'
 every 1.hours do
   rake "update_feeds"
   rake "refresh_sharecounts"
+  rake "recompute_scores"
 end

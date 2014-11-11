@@ -1,12 +1,12 @@
 `import Ember from 'ember'`
 
 C = Ember.Controller.extend
-  storySort: 'sharecount'
+  storySort: 'score'
   sortMethod: Ember.computed 'storySort', ->
     [@get 'storySort', 'id']
   nextSort: Ember.computed 'storySort', ->
     if @get('storySort') == 'timestamp'
-      'sharecount'
+      'score'
     else
       'timestamp'
   isMobile: Ember.computed ->
