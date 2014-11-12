@@ -43,9 +43,6 @@ class Story < ActiveRecord::Base
       logger.info("failed to fetch share count for #{self.url}: \n\t #{data["Error"]}")
     else
       self.sharecount = data.except("Facebook").values.sum + data["Facebook"].values.sum
-      if self.feed.time_decay
-        self.sharecount = time_decay_sharecount
-      end
       self.updated_at = Time.now
       save!
     end
