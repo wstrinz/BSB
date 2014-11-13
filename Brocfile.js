@@ -24,5 +24,6 @@ app.import('bower_components/ember-hammer/ember-hammer.js');
 app.import('bower_components/bootstrap/dist/js/bootstrap.min.js');
 app.import('bower_components/bootstrap/dist/css/bootstrap.min.css');
 app.import('bower_components/bootstrap/dist/css/bootstrap-theme.min.css');
+app.import('bower_components/ember-easyForm-shim/dist/ember-easyForm.min.js');
 
 module.exports = app.toTree();

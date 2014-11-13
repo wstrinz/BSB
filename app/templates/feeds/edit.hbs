@@ -1,9 +1,10 @@
 <div class="container-fluid">
-  <div class="row">
-    <h2>{{name}}</h2>
-    {{input type="checkbox" name="enableTimeDecay" checked=time_decay}}
-  </div>
-  <div class="row">
-    <button {{action 'save'}}>Save</button>
-  </div>
+  <form {{action "updateFeed" on="submit"}}>
+    <h2 class="form-group">{{name}}</h2>
+    <div class="row form-group">
+      <label for='time_decay'>Time Decay?</label>
+      {{input id='time_decay' type="checkbox" name="time_decay" checked=model.time_decay}}
+    </div>
+    <button class="btn btn-primary btn-block" type="submit">Save</button>
+  </form>
 </div>
