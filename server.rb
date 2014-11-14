@@ -84,6 +84,11 @@ post '/feeds' do
   Feed.create!(data["feed"])
 end
 
+post '/recompute_scores' do
+  cmd = 'nohup bundle exec rake recompute_scores --trace > score_recompute.out 2>&1 &'
+  system cmd
+end
+
 put '/stories/:id' do
   post_params = JSON.parse(request.body.read)
   Story.find(params[:id]).update_attributes(post_params["story"])

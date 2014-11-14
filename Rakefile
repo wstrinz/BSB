@@ -21,8 +21,19 @@ end
 
 desc "Refresh share counts"
 task :recompute_scores do
-  Story.all.each do |s|
+
+  count = Story.count
+  Story.all.each_with_index do |s, i|
     s.recompute_score
+    if i % 100 == 0
+      puts <<-EOM
+      ==
+
+      #{i+1}/#{count} stories processed
+
+      ==
+      EOM
+    end
     s.save!
   end
 end

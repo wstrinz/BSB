@@ -21,3 +21,4 @@ secrets.yml
 
 # dev db
 *.db
+score_recompute.out
