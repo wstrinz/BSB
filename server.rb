@@ -15,6 +15,7 @@ require 'feedjira'
 require path_to('lib/models/feed')
 require path_to('lib/models/story')
 require path_to('lib/models/feeds/hacker_news')
+require path_to('lib/background_jobs/recompute_job')
 
 require_relative 'lib/routes_helper'
 include RoutesHelper
@@ -52,6 +53,12 @@ configure :development do
   Sinatra::Application.also_reload "lib/**/*.rb"
 end
 
+get '/recompute_status' do
+  job_status = RecomputeJob.poll
+  content_type :json
+  {status: job_status.to_s, code: status}.to_json
+end
+
 get '*' do
   accepts_json = request.accept.map(&:to_s).include?('application/json')
   only_accepts_all = request.accept.first.to_s == '*/*'
@@ -85,9 +92,9 @@ post '/feeds' do
 end
 
 post '/recompute_scores' do
-  cmd = 'nohup bundle exec rake recompute_scores --trace > score_recompute.out 2>&1 &'
-  system cmd
+  RecomputeJob.run
 end
+
 
 put '/stories/:id' do
   post_params = JSON.parse(request.body.read)

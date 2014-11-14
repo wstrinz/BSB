@@ -11,7 +11,12 @@
       <button {{action 'add_feed'}}>Add feed</button>
       <p>Show Read: <button {{action toggleShowRead}}>{{controllers.application.showRead}}</button></p>
       <p>Sort: <button {{action cycleSort}}>{{controllers.application.storySort}}</button></p>
-      <div><button {{action 'recomputeScores'}}>{{rescoreMessage}}</button></div>
+      <div>
+        <div {{bind-attr class="isRecomputing:show:hidden"}}>
+          {{recomputeStatus}}
+        </div>
+        <button {{action 'recomputeScores'}} {{bind-attr disabled='isRecomputing'}} >{{rescoreMessage}}</button>
+      </div>
       <div>{{#link-to 'feeds.all'}}All Stories{{/link-to}}</div>
       <div><h3>Feeds</h3></div>
       <ul>
