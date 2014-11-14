@@ -23,7 +23,7 @@ desc "Refresh share counts"
 task :recompute_scores do
 
   count = Story.count
-  Story.all.each_with_index do |s, i|
+  Story.where(read: false).each_with_index do |s, i|
     s.recompute_score
     if i % 100 == 0
       puts <<-EOM
