@@ -22,7 +22,8 @@ end
 desc "Refresh share counts"
 task :recompute_scores do
 
-  count = Story.count
+  ActiveRecord::Base.logger.level = 1
+  count = Story.where(read: false).count
   Story.where(read: false).each_with_index do |s, i|
     s.recompute_score
     if i % 100 == 0
