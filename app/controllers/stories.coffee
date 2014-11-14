@@ -7,8 +7,10 @@ C = Ember.ArrayController.extend NextPrev, Paginates,
   sortProperties: Ember.computed.alias 'controllers.application.sortMethod'
   sortAscending: false
   storySort: Ember.computed.alias 'controllers.application.storySort'
-  feed: Ember.computed 'model', -> @get('model').content[0].get('feed')
+  model_feed: Ember.computed.alias 'model.firstObject.feed'
   showRead: Ember.computed.alias 'controllers.application.showRead'
+  feed_title: Ember.computed.alias 'model.firstObject.feed.name'
+  feed_url: Ember.computed.alias 'model.firstObject.feed.feed_url'
 
   showReadStories: Ember.computed 'showRead', ->
     su = @get 'showRead'

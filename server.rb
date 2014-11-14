@@ -91,8 +91,6 @@ end
 
 put '/feeds/:id' do
   post_params = JSON.parse(request.body.read)
-  require 'pry'
-  binding.pry
   Feed.find(params[:id]).update_attributes(post_params["feed"])
 end
 

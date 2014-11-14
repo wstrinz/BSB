@@ -1,4 +1,7 @@
-<a target="_blank" {{bind-attr href="feed_url"}}>{{feed_url}}</a>
+<h2 class="no-show-link">
+  <a target="_blank" {{bind-attr href="feed_url" title="field_title"}} >{{feed_title}}</a>
+</h2>
+{{#link-to 'feeds.edit' model_feed}}Edit{{/link-to}}
 <div class="hidden">
   {{storiesLeft}}
 </div>
