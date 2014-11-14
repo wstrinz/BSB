@@ -23,7 +23,7 @@ desc "Refresh share counts"
 task :recompute_scores do
   ActiveRecord::Base.logger.level = 1
   count = Story.where(read: false).count
-  interval = (count.to_f * 0.10).round
+  interval = (count.to_f * 0.01).round
   pretty_percent = ->(num,denom){ ( ( num.to_f / denom.to_f ) * 100 ).round(2) }
   Story.where(read: false).each_with_index do |s, i|
     s.recompute_score
