@@ -11,7 +11,14 @@ class Feed < ActiveRecord::Base
 
     if self.name != f.title
       self.name = f.title
-      self.save
+    end
+
+    if f.url.present?
+      self.site_url = f.url
+    end
+
+    if self.site_url.blank?
+      self.site_url = self.feed_url
     end
 
     update_count = 0
@@ -26,6 +33,7 @@ class Feed < ActiveRecord::Base
         s.save
       end
     end
+    self.save
     logger.info "Feed #{name} updated #{update_count} stories"
   end
 
