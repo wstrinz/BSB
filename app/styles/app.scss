@@ -11,6 +11,10 @@ body {
     height: 16px;
   }
 
+  ul.no-bullet {
+    list-style-type: none;
+  }
+
   iframe {
     height: 100%;
     min-height: 700px;
