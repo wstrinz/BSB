@@ -22,6 +22,7 @@
       <ul>
         {{#each}}
         <li>
+        <img class="favicon" {{bind-attr src=faviconUrl}} alt="favicon">
         {{#link-to 'stories' id}}({{unread_count}}) {{name}}{{/link-to}}
         </li>
         {{/each}}

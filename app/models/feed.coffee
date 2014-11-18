@@ -6,6 +6,7 @@ Feed = DS.Model.extend
   unread_count: DS.attr('number')
   time_decay: DS.attr('boolean')
   time_decay_interval: DS.attr('number')
+  faviconUrl: Ember.computed 'feed_url', -> "http://g.etfv.co/#{@get('feed_url')}"
   stories: DS.hasMany('story', {async: true})
 
 `export default Feed`
