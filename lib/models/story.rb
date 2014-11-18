@@ -50,8 +50,8 @@ class Story < ActiveRecord::Base
 
   def time_decay_sharecount
     if self.sharecount.present? && self.timestamp.present?
-      days_ago = ((Time.now - self.timestamp) / 1.days).round
-      decayed_count = sharecount / ((days_ago + 1) ** 1.5)
+      elapsed_interval_hours = ((Time.now - self.timestamp) / feed.time_decay_interval.hours).round
+      decayed_count = sharecount / ((elapsed_interval_hours + 1) ** 1.5)
       (decayed_count + 1).round
     else
       sharecount

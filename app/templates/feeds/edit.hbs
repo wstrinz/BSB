@@ -5,6 +5,10 @@
       <label for='time_decay'>Time Decay?</label>
       {{input id='time_decay' type="checkbox" name="time_decay" checked=model.time_decay}}
     </div>
+    <div class="row form-group">
+      <label for='time_decay_interval'>Time Decay Interval (hours)</label>
+      {{input id='time_decay_interval' name="time_decay_interval" value=model.time_decay_interval}}
+    </div>
     <button class="btn btn-primary btn-block" type="submit">Save</button>
   </form>
 </div>
