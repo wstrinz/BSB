@@ -1,7 +1,7 @@
-<div class="story">
+<div class="story" {{action 'toggleFocus' story}}>
   <li {{bind-attr class="story.focused"}}>
       <div class='story-title'>
-        <a {{bind-attr href="story.url"}} {{action 'toggleFocus' story}}>{{story.title}}</a>
+        <a {{bind-attr href="story.url"}} {{action 'openIfFocused' story}}>{{story.title}}</a>
       </div>
       <div class="story-info">
         <img class="favicon" {{bind-attr src=story.faviconUrl}} alt="favicon">

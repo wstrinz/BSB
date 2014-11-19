@@ -55,6 +55,10 @@ M = Ember.Mixin.create
         story.set('focused', true)
         @set('focusedStory', story)
 
+    openIfFocused: (story) ->
+      if story.get('focused')
+        window.open(story.get('url'))
+
     resetFocus: (force) ->
       model = @get 'model'
       current = @get 'focusedStory'
