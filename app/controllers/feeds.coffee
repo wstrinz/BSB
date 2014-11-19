@@ -9,7 +9,7 @@ C = Ember.ArrayController.extend
     url = Ember.$('#add_feed').val()
     new_feed = @store.createRecord 'feed', {feed_url: url, name: 'temp'}
     new_feed.save()
-  showFeeds: true
+  showFeeds: false
   isRecomputing: false
   recomputeStatus: "idle"
   unreadCount: Ember.computed '@each.unread_count', ->
