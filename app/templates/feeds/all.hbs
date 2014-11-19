@@ -3,15 +3,17 @@
     {{storiesLeft}}
   </div>
   <div class="row">
-    {{#if showReadStories}}
-      {{#each story in model}}
-        {{render 'story' story}}
-      {{/each}}
-    {{else}}
-      {{#each story in unreadStories}}
-        {{render 'story' story}}
-      {{/each}}
-    {{/if}}
+    <ul class="no-bullet">
+      {{#if showReadStories}}
+        {{#each story in model}}
+          {{render 'story' story}}
+        {{/each}}
+      {{else}}
+        {{#each story in unreadStories}}
+          {{render 'story' story}}
+        {{/each}}
+      {{/if}}
+    </ul>
   </div>
   <div class="row">
     <button {{action 'loadNextPage'}}>Next</button>

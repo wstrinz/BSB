@@ -1,21 +1,29 @@
-<li {{bind-attr class="story.focused"}}>
-  <div>
-    {{#if controllers.application.unreadButtonsInIndex}}
-      <button {{action 'toggleRead' story.id}}>
-        {{#if story.read}}●{{else}}○{{/if}}
-      </button>
+<div class="story">
+  <li {{bind-attr class="story.focused"}}>
+      <div class='story-title'>
+        <a {{bind-attr href="story.url"}} {{action 'toggleFocus' story}}>{{story.title}}</a>
+      </div>
+      <div class="story-info">
+        <img class="favicon" {{bind-attr src=story.faviconUrl}} alt="favicon">
+        {{story.feed.name}}
+      </div>
+      <div class="story-controls">
+        {{#if controllers.application.unreadButtonsInIndex}}
+          <button {{action 'toggleRead' story.id}}>
+            {{#if story.read}}●{{else}}○{{/if}}
+          </button>
+        {{/if}}
+      </div>
+    {{#if story.focused}}
+    <div class='container-fluid'>
+      <div class='row story-summary-info'>
+        <div class='col-md-6'>{{story.author}} -- {{story.human_time}}</div>
+        <div class='col-md-1'>{{story.score}}</div>
+      </div>
+      <div class='row story-summary'>
+        <div class='col-md-12'>{{partial 'stories/story-details'}}</div>
+      </div>
+    </div>
     {{/if}}
-    <a {{bind-attr href="story.url"}} {{action 'toggleFocus' story}}>{{story.title}} - {{story.feed.name}}</a>
-  </div>
-  {{#if story.focused}}
-  <div class='container-fluid'>
-    <div class='row story-summary-info'>
-      <div class='col-md-6'>{{story.author}} -- {{story.human_time}}</div>
-      <div class='col-md-1'>{{story.score}}</div>
-    </div>
-    <div class='row story-summary'>
-      <div class='col-md-12'>{{partial 'stories/story-details'}}</div>
-    </div>
-  </div>
-  {{/if}}
-</li>
+  </li>
+</div>

@@ -15,6 +15,18 @@ body {
     list-style-type: none;
   }
 
+  .story {
+    padding: 0.5em;
+    margin: 0.1em;
+    border: 2px solid #D9D8D7;
+    border-radius: 8px;
+  }
+
+  .story-info {
+    margin-left: 1em;
+    font-size: 0.8em;
+  }
+
   iframe {
     height: 100%;
     min-height: 700px;

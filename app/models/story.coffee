@@ -14,6 +14,7 @@ Story = DS.Model.extend
   sharecount: DS.attr 'number'
   score: DS.attr 'number'
   feed: DS.belongsTo 'feed'
+  faviconUrl: Ember.computed 'url', -> "http://g.etfv.co/#{@get('url')}"
   human_time: Ember.computed 'timestamp', ->
     moment(@get 'timestamp').format 'LLL'
 
