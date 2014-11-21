@@ -88,7 +88,7 @@ end
 
 post '/feeds' do
   data = JSON.parse(request.body.read)
-  Feed.create!(data["feed"])
+  Feed.create!(data["feed"].delete_if{|k,v| v == nil})
 end
 
 post '/recompute_scores' do
