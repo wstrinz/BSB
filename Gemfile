@@ -10,6 +10,8 @@ gem 'rake'
 gem 'pg'
 gem 'will_paginate'
 
+gem 'rack-ssl-enforcer'
+
 gem 'omniauth'
 gem 'omniauth-github'
 

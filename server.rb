@@ -13,6 +13,8 @@ require 'will_paginate/active_record'
 require 'omniauth'
 require 'omniauth-github'
 
+require 'rack/ssl-enforcer'
+
 require 'feedjira'
 
 require path_to('lib/models/feed')
@@ -61,7 +63,8 @@ helpers do
   def authenticate!
     unless self.class.production?
       session[:authenticated] = true
-      session[:auth_hash] = sample_auth_hash
+      session[:auth_hash] = {"info" => {"email" => ENV['GITHUB_OWNER_EMAIL']}}
+      redirect '/'
     else
       redirect '/auth/github'
     end
@@ -100,7 +103,7 @@ get '/recompute_status' do
 end
 
 get '/login' do
-  redirect '/auth/github'
+  authenticate!
 end
 
 get '/logout' do
