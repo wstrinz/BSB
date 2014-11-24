@@ -43,8 +43,13 @@ class ApiKeys
 end
 
 helpers do
+
+  def is_owner?
+    session.to_hash.fetch("auth_hash",{}).fetch("info", {}).fetch("email",{}) == ENV['GITHUB_OWNER_EMAIL']
+  end
+
   def authenticated?
-    session[:authenticated]
+    session[:authenticated] && is_owner?
   end
 
   def ensure_authenticated
@@ -96,6 +101,11 @@ end
 
 get '/login' do
   redirect '/auth/github'
+end
+
+get '/logout' do
+  logout!
+  redirect '/'
 end
 
 get '*' do
