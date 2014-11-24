@@ -10,6 +10,9 @@ require 'sinatra/activerecord'
 require 'will_paginate'
 require 'will_paginate/active_record'
 
+require 'omniauth'
+require 'omniauth-github'
+
 require 'feedjira'
 
 require path_to('lib/models/feed')
@@ -39,6 +42,31 @@ class ApiKeys
   end
 end
 
+helpers do
+  def authenticated?
+    session[:authenticated]
+  end
+
+  def ensure_authenticated
+    unless authenticated?
+      authenticate!
+    end
+  end
+
+  def authenticate!
+    unless self.class.production?
+      session[:authenticated] = true
+      session[:auth_hash] = sample_auth_hash
+    else
+      redirect '/auth/github'
+    end
+  end
+
+  def logout!
+    session.clear
+  end
+end
+
 configure do
   set :public_folder, File.expand_path(path_to 'dist')
   if File.exist? 'secrets.yml'
@@ -46,6 +74,13 @@ configure do
   else
     puts 'No secrets.yml found, some integrations may be unavailable'
   end
+
+  use OmniAuth::Builder do
+    user_scopes = 'user,repo,read:repo_hook,write:repo_hook,admin:repo_hook,read:org'
+    provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'], scope: user_scopes
+  end
+
+  enable :sessions
 end
 
 configure :development do
@@ -59,10 +94,14 @@ get '/recompute_status' do
   {status: job_status.to_s, code: status}.to_json
 end
 
+get '/login' do
+  redirect '/auth/github'
+end
+
 get '*' do
   accepts_json = request.accept.map(&:to_s).include?('application/json')
   only_accepts_all = request.accept.first.to_s == '*/*'
-  pass if accepts_json || only_accepts_all
+  pass if accepts_json || only_accepts_all || request.path[/\/auth/]
   send_file 'dist/index.html'
 end
 
@@ -86,24 +125,49 @@ get '/stories' do
   resp.to_json
 end
 
+
+get '/auth/:provider/callback' do
+  content_type :json
+
+  auth_hash = request.env['omniauth.auth']
+  session[:authenticated] = true
+  session[:auth_hash] = auth_hash
+  redirect "/"
+end
+
 post '/feeds' do
-  data = JSON.parse(request.body.read)
-  Feed.create!(data["feed"].delete_if{|k,v| v == nil})
+  if authenticated?
+    data = JSON.parse(request.body.read)
+    Feed.create!(data["feed"].delete_if{|k,v| v == nil})
+  else
+    status 401
+  end
 end
 
 post '/recompute_scores' do
-  RecomputeJob.run
+  if authenticated?
+    RecomputeJob.run
+  else
+    status 401
+  end
 end
 
-
 put '/stories/:id' do
-  post_params = JSON.parse(request.body.read)
-  Story.find(params[:id]).update_attributes(post_params["story"])
+  if authenticated?
+    post_params = JSON.parse(request.body.read)
+    Story.find(params[:id]).update_attributes(post_params["story"])
+  else
+    status 401
+  end
 end
 
 put '/feeds/:id' do
-  post_params = JSON.parse(request.body.read)
-  Feed.find(params[:id]).update_attributes(post_params["feed"])
+  if authenticated?
+    post_params = JSON.parse(request.body.read)
+    Feed.find(params[:id]).update_attributes(post_params["feed"])
+  else
+    status 401
+  end
 end
 
 api_routes Feed

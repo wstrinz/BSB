@@ -10,6 +10,9 @@ gem 'rake'
 gem 'pg'
 gem 'will_paginate'
 
+gem 'omniauth'
+gem 'omniauth-github'
+
 gem 'rspec'
 gem 'factory_girl'
 gem 'database_cleaner'
