@@ -2,8 +2,16 @@
 
 C = Ember.Controller.extend
   storySort: 'score'
-  sortMethod: Ember.computed 'storySort', ->
-    [@get 'storySort', 'id']
+  sortFunction: Ember.computed 'storySort', (x,y) ->
+    method = @get('storySort')
+    if x.get('id') == y.get('id')
+      0
+    else
+      if x.get(method) == y.get(method)
+        x.get('id') < y.get('id') ? -1 : 1
+      else
+        x.get(method) < y.get(method) ? -1 : 1
+
   nextSort: Ember.computed 'storySort', ->
     if @get('storySort') == 'timestamp'
       'score'

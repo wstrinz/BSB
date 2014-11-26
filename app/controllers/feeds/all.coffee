@@ -4,7 +4,9 @@
 
 C = Ember.ArrayController.extend NextPrev, Paginates,
   needs: ['application']
-  sortProperties: Ember.computed.alias 'controllers.application.sortMethod'
+  #sortProperties: Ember.computed.alias 'controllers.application.sortMethod'
+  sortFunction: Ember.computed.alias 'controllers.application.sortFunction'
+
   sortAscending: false,
 
   showReadStories: Ember.computed 'showRead', ->
