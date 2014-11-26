@@ -10,6 +10,8 @@ require 'sinatra/activerecord'
 require 'will_paginate'
 require 'will_paginate/active_record'
 
+require 'newrelic_rpm'
+
 require 'omniauth'
 require 'omniauth-github'
 
