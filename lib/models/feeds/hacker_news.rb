@@ -1,9 +1,13 @@
 require 'ruby-hackernews'
 class HackerNewsFeed < Feed
+  def in_archive?(entry)
+    StoryArchive.contains?(entry.link.href) || StoryArchive.contains?("http://news.ycombinator.com/#{s.url}")
+  end
+
   def update
     entries = RubyHackernews::Entry.all
     t = Time.now
-    news = entries.select{ |e| Story.where(url: e.link.href).empty? }
+    news = entries.select{ |e| Story.where(url: e.link.href).empty? && !in_archive(entry) }
     logger.info "Hacker News added #{news.count} stories"
     news.each do |e|
       s = Story.new
