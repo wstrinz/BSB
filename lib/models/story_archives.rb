@@ -1,14 +1,15 @@
 class StoryArchive < ActiveRecord::Base
   def self.instance
-    StoryArchive.first || StoryArchive.create
+    @instance ||= (StoryArchive.first || StoryArchive.create)
   end
 
-  def self.archive_story(story)
-    require 'pry'; binding.pry
-    instance
+  def self.archive(story)
+    instance.archived_urls << story.url
+    instance.archived_urls_will_change!
+    instance.save
   end
 
-  def self.in_archive?(url)
-    instance
+  def self.contains?(url)
+    where(['? = ANY(archived_urls)', url]).present?
   end
 end

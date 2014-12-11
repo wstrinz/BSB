@@ -34,7 +34,13 @@ class Story < ActiveRecord::Base
     end
   end
 
-  def self.remove_old_stories_if_needed(max: ENV['DB_ROW_MAX'], margin: ENV['DB_ROW_MARGIN'], criterion: :created_at, direction: :asc)
+  def self.archive_read_stories
+    Story.where(read: true).map(&:archive!)
+  end
+
+  def self.archive_old_stories_if_needed(max: ENV['DB_ROW_MAX'], margin: ENV['DB_ROW_MARGIN'], criterion: :created_at, direction: :asc)
+    archive_read_stories
+
     max = max.to_i
     margin = margin.to_i
     max ||= -1
@@ -48,11 +54,16 @@ class Story < ActiveRecord::Base
 
     if row_count + margin >= max
       num_to_delete = row_count - (max - margin) + 1
-      Story.order(criterion => direction).limit(num_to_delete).destroy_all
+      Story.order(criterion => direction).limit(num_to_delete).map(&:archive!)
       logger.info "Destroyed #{num_to_delete} old stories"
     else
       logger.info "Only #{row_count} rows exist, deletion will not happen unless #{max - margin} is reached"
     end
+  end
+
+  def archive!
+    StoryArchive.archive(self)
+    self.destroy
   end
 
   def update_sharecount

@@ -23,7 +23,7 @@ class Feed < ActiveRecord::Base
 
     update_count = 0
     f.entries.each do |e|
-      if Story.where(url: e.url).empty?
+      if Story.where(url: e.url).empty? && !StoryArchive.contains?(e.url)
         update_count += 1
         s = Story.from_entry(e)
         s.feed = self

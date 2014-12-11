@@ -5,7 +5,7 @@ desc "Update All Feeds"
 task :update_feeds do
   ActiveRecord::Base.logger.level = 1
   margin = (ENV['UPDATE_DB_MARGIN'] || 200).to_i
-  Story.remove_old_stories_if_needed(margin: margin)
+  Story.archive_old_stories_if_needed(margin: margin)
   Feed.all.each do |f|
     f.update
   end
@@ -38,5 +38,5 @@ end
 
 desc "Remove old stories to ensure under quota"
 task :remove_old_stories do
-  Story.remove_old_stories_if_needed
+  Story.archive_old_stories_if_needed
 end

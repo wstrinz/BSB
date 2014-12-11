@@ -48,4 +48,6 @@ ActiveRecord::Schema.define(version: 20141211180203) do
     t.string "archived_urls", default: [], array: true
   end
 
+  add_index "story_archives", ["archived_urls"], name: "index_story_archives_on_archived_urls", using: :gin
+
 end
