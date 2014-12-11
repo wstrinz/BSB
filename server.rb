@@ -21,6 +21,7 @@ require 'feedjira'
 
 require path_to('lib/models/feed')
 require path_to('lib/models/story')
+require path_to('lib/models/story_archives')
 require path_to('lib/models/feeds/hacker_news')
 require path_to('lib/background_jobs/recompute_job')
 
