@@ -34,7 +34,7 @@ class Story < ActiveRecord::Base
     end
   end
 
-  def self.remove_old_stories_if_needed(max = ENV['DB_ROW_MAX'], margin = ENV['DB_ROW_MARGIN'], criterion=:created_at, direction=:asc)
+  def self.remove_old_stories_if_needed(max: ENV['DB_ROW_MAX'], margin: ENV['DB_ROW_MARGIN'], criterion: :created_at, direction: :asc)
     max = max.to_i
     margin = margin.to_i
     max ||= -1

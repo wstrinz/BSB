@@ -4,6 +4,8 @@ require "sinatra/activerecord/rake"
 desc "Update All Feeds"
 task :update_feeds do
   ActiveRecord::Base.logger.level = 1
+  margin = (ENV['UPDATE_DB_MARGIN'] || 200).to_i
+  Story.remove_old_stories_if_needed(margin: margin)
   Feed.all.each do |f|
     f.update
   end
