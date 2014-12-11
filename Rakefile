@@ -33,3 +33,8 @@ task :recompute_scores do
     s.save!
   end
 end
+
+desc "Remove old stories to ensure under quota"
+task :remove_old_stories do
+  Story.remove_old_stories_if_needed
+end
