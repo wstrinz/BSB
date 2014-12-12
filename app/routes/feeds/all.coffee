@@ -2,8 +2,6 @@
 `import RouteMixin from 'ember-cli-pagination/remote/route-mixin'`
 
 R = Ember.Route.extend RouteMixin,
-  perPage: 10
-
   model: (params) ->
     appcon = @controllerFor('application')
     filter_params = sort: appcon.get('storySort')

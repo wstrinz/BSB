@@ -30,6 +30,9 @@ M = Ember.Mixin.create
         @get('currentStory').set('focused', false)
         @set('focusedStory', next)
         next.set('focused', true)
+      else
+        @get('currentStory').set('focused', false)
+        @send('goToNextPage')
 
     prevItem: ->
       prev = @storyAt(-1)
@@ -37,6 +40,9 @@ M = Ember.Mixin.create
         @get('currentStory').set('focused', false)
         @set('focusedStory', prev)
         prev.set('focused', true)
+      else
+        @get('currentStory').set('focused', false)
+        @send('goToPrevPage')
 
     focusStory: (story) ->
       @get('currentStory').set('focused', false)

@@ -9,7 +9,7 @@ M = Ember.Mixin.create
   totalPagesBinding: "content.totalPages"
 
   page: 1
-  perPage: 10
+  perPage: 8
 
   storiesLeft: Ember.computed 'focusedStory', ->
     current = @get 'focusedStory'
@@ -27,6 +27,15 @@ M = Ember.Mixin.create
       @send 'loadNextPage'
 
   actions:
-    loadNextPage: -> return null #@get('pagedContent').loadNextPage()
+    loadNextPage: -> return null
+    goToNextPage: ->
+      @set('page', @get('page') + 1)
+      @transitionToRoute this.get('controllers.application.currentRouteName')
+    goToPrevPage: ->
+      if @get('page') > 0
+        @set('page', @get('page') + -1)
+        @transitionToRoute this.get('controllers.application.currentRouteName')
+      else
+        false
 
 `export default M`
