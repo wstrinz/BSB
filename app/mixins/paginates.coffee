@@ -1,8 +1,15 @@
 `import Ember from 'ember'`
+`import pagedArray from 'ember-cli-pagination/computed/paged-array'`
 
 M = Ember.Mixin.create
-  paginateAt: 8
+  queryParams: ["page", "perPage"],
+
+  pageBinding: "content.page"
+  perPageBinding: "content.perPage"
+  totalPagesBinding: "content.totalPages"
+
   page: 1
+  perPage: 10
 
   storiesLeft: Ember.computed 'focusedStory', ->
     current = @get 'focusedStory'
@@ -15,12 +22,11 @@ M = Ember.Mixin.create
     model_content.length - model_content.indexOf(current)
 
   shouldPaginate: Ember.observer 'storiesLeft', ->
+    return false
     if @get('storiesLeft') <= @get('paginateAt')
       @send 'loadNextPage'
 
   actions:
-    loadNextPage: ->
-      @set('page', @get('page') + 1)
-      @send('reload')
+    loadNextPage: -> return null #@get('pagedContent').loadNextPage()
 
 `export default M`

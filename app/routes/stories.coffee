@@ -1,13 +1,15 @@
 `import Ember from 'ember'`
+`import RouteMixin from 'ember-cli-pagination/remote/route-mixin'`
 
-R = Ember.Route.extend
+R = Ember.Route.extend RouteMixin,
   model: (params) ->
     appcon = @controllerFor('application')
     @set('feed_id', params.feed_id)
-    @store.find 'story',
-      feed_id: params.feed_id
-      read: appcon.get('showRead')
-      sort: appcon.get('storySort')
+    filter_params = sort: appcon.get('storySort'), feed_id: params.feed_id
+    unless appcon.get('showRead')
+      filter_params["read"] = false
+
+    @findPaged 'story', filter_params
 
   setupController: (controller, model) ->
     controller.set 'model', model

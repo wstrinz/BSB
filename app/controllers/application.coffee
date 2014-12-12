@@ -23,7 +23,7 @@ C = Ember.Controller.extend
   unreadButtonsInIndex: Ember.computed 'isMobile', ->
     @get 'isMobile'
 
-  showRead: false
+  showRead: true
   showInIframe: false
 
 

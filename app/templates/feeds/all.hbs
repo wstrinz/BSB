@@ -4,18 +4,12 @@
   </div>
   <div class="row">
     <ul class="no-bullet">
-      {{#if showReadStories}}
-        {{#each story in model}}
-          {{render 'story' story}}
-        {{/each}}
-      {{else}}
-        {{#each story in unreadStories}}
-          {{render 'story' story}}
-        {{/each}}
-      {{/if}}
+      {{#each story in filteredContent}}
+        {{render 'story' story}}
+      {{/each}}
     </ul>
   </div>
   <div class="row">
-    <button {{action 'loadNextPage'}}>Next</button>
+    {{page-numbers content=content}}
   </div>
 </div>

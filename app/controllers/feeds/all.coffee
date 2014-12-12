@@ -7,18 +7,26 @@ C = Ember.ArrayController.extend NextPrev, Paginates,
   #sortProperties: Ember.computed.alias 'controllers.application.sortMethod'
   sortFunction: Ember.computed.alias 'controllers.application.sortFunction'
 
-  sortAscending: false,
+  sortAscending: false
 
   showReadStories: Ember.computed 'showRead', ->
     su = @get 'showRead'
     if su == undefined
-      @set 'showRead', false
-      false
+      @set 'showRead', true
+      true
     else
       su
 
+  filteredContent: Ember.computed '@each.read', ->
+    if @get('showRead')
+      @get('content')
+    else
+      @get('content').filter (story) ->
+        story.get('read') == false
+
+
   unreadStories: Ember.computed '@each.read', ->
-    @filter (story) ->
+    @get('pagedContent').filter (story) ->
       story.get('read') == false
 
   actions:

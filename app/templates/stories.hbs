@@ -6,13 +6,10 @@
   {{storiesLeft}}
 </div>
 <ul>
-{{#if showReadStories}}
-  {{#each story in model}}
-    {{render 'story' story}}
-  {{/each}}
-{{else}}
-  {{#each story in unreadStories}}
-    {{render 'story' story}}
-  {{/each}}
-{{/if}}
+{{#each story in filteredContent}}
+  {{render 'story' story}}
+{{/each}}
 </ul>
+<div class="row">
+  {{page-numbers content=content}}
+</div>

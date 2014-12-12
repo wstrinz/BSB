@@ -129,14 +129,17 @@ get '/stories' do
   query_opts[:read] = (params[:read] == "true") if params[:read]
   order = params[:sort] if params[:sort]
   page = params[:page] || 1
+  per_page = params[:per_page] || 10
 
   resp = if order
            { stories: Story.where(query_opts)
              .order(order => :desc)
-             .paginate(page: page, per_page: 15) }
+             .paginate(page: page, per_page: per_page) }
          else
-           { stories: Story.where(query_opts).paginate(page: page) }
+           { stories: Story.where(query_opts).paginate(page: page, per_page: per_page) }
          end
+
+  resp[:meta] = { total_pages: Story.where(query_opts).count / per_page.to_i }
 
   resp.to_json
 end

@@ -13,12 +13,7 @@ C = Ember.ArrayController.extend NextPrev, Paginates,
   feed_url: Ember.computed.alias 'model.firstObject.feed.feed_url'
 
   showReadStories: Ember.computed 'showRead', ->
-    su = @get 'showRead'
-    if su == undefined
-      @set 'showRead', false
-      false
-    else
-      su
+    @get 'showRead'
 
   unreadStories: Ember.computed '@each.read', ->
     @filter (story) -> story.get('read') == false
@@ -28,6 +23,13 @@ C = Ember.ArrayController.extend NextPrev, Paginates,
       @length
     else
       @get('feed').unread_count
+
+  filteredContent: Ember.computed '@each.read', ->
+    if @get('showRead')
+      @get('content')
+    else
+      @get('content').filter (story) ->
+        story.get('read') == false
 
   actions:
     viewItem: ->

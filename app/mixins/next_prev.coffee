@@ -3,7 +3,7 @@
 M = Ember.Mixin.create
   storyAt: (offset) ->
     current = @get 'currentStory'
-    model_content = @get 'model.arrangedContent'
+    model_content = @get 'model.arrangedContent.content'
     sortMethod = @get 'controllers.application.storySort'
     showRead = @get 'showReadStories'
 
@@ -60,6 +60,7 @@ M = Ember.Mixin.create
         window.open(story.get('url'))
 
     resetFocus: (force) ->
+      return false
       model = @get 'model'
       current = @get 'focusedStory'
 

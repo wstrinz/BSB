@@ -1,4 +1,4 @@
-<div class="story-container row">
+<div {{bind-attr class=":story-container :row story.read:read:unread"}}>
   <div class="story-controls">
     {{#if controllers.application.unreadButtonsInIndex}}
     <button {{action 'toggleRead' story.id}}>
