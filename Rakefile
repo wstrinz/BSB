@@ -40,3 +40,8 @@ desc "Remove old stories to ensure under quota"
 task :remove_old_stories do
   Story.archive_old_stories_if_needed
 end
+
+desc "Remove old stories to ensure under quota"
+task :archive_read_stories do
+  Story.archive_read_stories
+end
