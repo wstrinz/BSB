@@ -22,6 +22,12 @@ body {
     border-radius: 8px;
   }
 
+  .story-container {
+    &.read {
+      opacity: 0.4
+    }
+  }
+
   .story-info {
     margin-left: 1em;
     font-size: 0.7em;

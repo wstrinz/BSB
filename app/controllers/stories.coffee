@@ -51,16 +51,15 @@ C = Ember.ArrayController.extend NextPrev, Paginates,
 
     toggleCurrentRead: ->
       current = @get 'currentStory'
-      if current.get 'marking'
-        Ember.run.cancel current.get('marking')
-      else
-        current.set 'marking', Ember.run.later(this, ->
-          current.set 'read', !current.get('read')
-          current.save()
-          current.set 'marking', null
-          current.get('feed').set('unread_count', current.get('feed.unread_count') - 1)
-        , 3500)
 
+      if current.get('read')
+        change = 1
+      else
+        change = -1
+
+      current.set 'read', !current.get('read')
+      current.save()
+      current.get('feed').set('unread_count', current.get('feed.unread_count') + change)
       @send 'nextItem'
 
 `export default C`

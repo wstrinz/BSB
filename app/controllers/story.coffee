@@ -8,13 +8,7 @@ C = Ember.ObjectController.extend
   actions:
     toggleRead: ->
       model = @get 'model'
-      if model.get 'marking'
-        Ember.run.cancel model.get('marking')
-      else
-        model.set 'marking', Ember.run.later(this, ->
-          model.set 'read', !model.get('read')
-          model.save()
-          model.set 'marking', null
-        , 3500)
+      model.set 'read', !model.get('read')
+      model.save()
 
 `export default C`
