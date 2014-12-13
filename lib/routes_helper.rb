@@ -13,7 +13,7 @@ module RoutesHelper
 
     json_opts = {methods: association_colums + extra_methods}
 
-    app.get("/#{plural_sym.to_s}") do
+    app.get("/api/#{plural_sym.to_s}") do
       content_type :json
       if params[:ids]
         { plural_sym => model.where(id: params[:ids]) }.to_json(json_opts)
@@ -22,7 +22,7 @@ module RoutesHelper
       end
     end
 
-    app.get("/#{plural_sym}/:id") do
+    app.get("/api/#{plural_sym}/:id") do
       content_type :json
       { single_sym => model.find(params[:id]) }.to_json(json_opts)
     end

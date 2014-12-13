@@ -114,14 +114,7 @@ get '/logout' do
   redirect '/'
 end
 
-get '*' do
-  accepts_json = request.accept.map(&:to_s).include?('application/json')
-  only_accepts_all = request.accept.first.to_s == '*/*'
-  pass if accepts_json || only_accepts_all || request.path[/\/auth/]
-  send_file 'dist/index.html'
-end
-
-get '/stories' do
+get '/api/stories' do
   content_type :json
   query_opts = {}
   query_opts[:id] = params[:ids] if params[:ids]
@@ -154,7 +147,7 @@ get '/auth/:provider/callback' do
   redirect "/"
 end
 
-post '/feeds' do
+post '/api/feeds' do
   if authenticated?
     data = JSON.parse(request.body.read)
     Feed.create!(data["feed"].delete_if{|k,v| v == nil})
@@ -171,7 +164,7 @@ post '/recompute_scores' do
   end
 end
 
-put '/stories/:id' do
+put '/api/stories/:id' do
   if authenticated?
     post_params = JSON.parse(request.body.read)
     Story.find(params[:id]).update_attributes(post_params["story"])
@@ -180,13 +173,20 @@ put '/stories/:id' do
   end
 end
 
-put '/feeds/:id' do
+put '/api/feeds/:id' do
   if authenticated?
     post_params = JSON.parse(request.body.read)
     Feed.find(params[:id]).update_attributes(post_params["feed"])
   else
     status 401
   end
+end
+
+get '*' do
+  accepts_json = request.accept.map(&:to_s).include?('application/json')
+  only_accepts_all = request.accept.first.to_s == '*/*'
+  pass if accepts_json || only_accepts_all || request.path[/\/auth/]
+  send_file 'dist/index.html'
 end
 
 api_routes Feed
