@@ -4,11 +4,12 @@
   </div>
   <div class='row'>
     <button {{action 'toggleSidebar'}}>
-      {{#if showFeeds}}&lt;--{{else}}--&gt;{{/if}}
+      {{#if showFeeds}}«{{else}}»{{/if}}
     </button>
     <div {{bind-attr class='showFeeds:col-md-3:hidden'}}>
       <div>{{#link-to 'feeds.all'}}All Stories{{/link-to}}</div>
       <div>{{#link-to 'settings'}}Settings{{/link-to}}</div>
+      <div>{{#link-to 'help'}}Help{{/link-to}}</div>
       <div><h3>Feeds</h3></div>
       <ul class='no-bullet'>
         {{#each}}

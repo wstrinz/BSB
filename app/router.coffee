@@ -14,5 +14,6 @@ Router.map ->
     #@route 'show', { path: '/:story_id' })
   @route 'shortcuts'
   @route 'settings'
+  @route 'help'
 
 `export default Router`

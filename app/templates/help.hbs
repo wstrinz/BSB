@@ -1,0 +1,37 @@
+<h3>Help</h3>
+<div class='container-fluid'>
+  <div class="row">
+    <div class='container-fluid'>
+      <h4>Built in shortcuts</h4>
+      <table class="table">
+        <tr>
+          <th>Key</th>
+          <th>Action</th>
+        </tr>
+        {{#each shortcut in built_in_shortcuts}}
+        <tr>
+          <td>{{shortcut.[0]}}</td>
+          <td>{{shortcut.[1]}}</td>
+        </tr>
+        {{/each}}
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class='container-fluid'>
+      <h4>{{#link-to 'shortcuts'}}User Shortcuts{{/link-to}}</h4>
+      <table class="table">
+        <tr>
+          <th>Key</th>
+          <th>Action</th>
+        </tr>
+        {{#each shortcut in user_shortcuts}}
+        <tr>
+          <td>{{shortcut.key}}</td>
+          <td>{{shortcut.action}}</td>
+        </tr>
+        {{/each}}
+      </table>
+    </div>
+  </div>
+</div>

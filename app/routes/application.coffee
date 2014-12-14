@@ -6,24 +6,13 @@ R = Ember.Route.extend
     'k': 'prevItem'
     'o': 'viewAndMarkItem'
     'shift+o': 'viewItem'
+    'shift+a': 'showAllFeeds'
     'm': 'toggleCurrentRead'
-    'u': 'toggleCurrentRead'
-    'f': 'backToFeed'
     'r': 'resetFocus'
     'p': 'toggleShowInIframe'
-    'R': 'reloadShortcuts'
+    'shift+/': 'showHelp'
 
-  shortcuts:
-    'j': 'nextItem'
-    'k': 'prevItem'
-    'o': 'viewAndMarkItem'
-    'shift+o': 'viewItem'
-    'm': 'toggleCurrentRead'
-    'u': 'toggleCurrentRead'
-    'f': 'backToFeed'
-    'r': 'resetFocus'
-    'p': 'toggleShowInIframe'
-    'R': 'reloadShortcuts'
+  shortcuts: {}
 
   shortcutsLoaded: false
 
@@ -32,7 +21,7 @@ R = Ember.Route.extend
       @set('shortcutsLoaded', true)
       Ember.run.later(transition, ->
         this.send('reloadShortcuts')
-      , 1500)
+      , 1000)
 
 
   actions:
@@ -50,6 +39,11 @@ R = Ember.Route.extend
         _this.controller.shortcuts.init()
 
       false
+
+    showHelp: ->
+      @transitionTo('help')
+    showAllFeeds: ->
+      @transitionTo('feeds.all')
 
 
 `export default R`
