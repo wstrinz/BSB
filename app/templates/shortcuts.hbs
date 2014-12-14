@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <h3>Keyboard Shortcuts</h3>
+  {{#each shortcut in model}}
+  <div class="row">
+    <div class="col-md-2">
+      {{input name="key" value=shortcut.key}}
+    </div>
+    <div class="col-md-2">
+      {{input name="action" value=shortcut.action}}
+    </div>
+    <div class="col-md-1">
+      <button {{action "deleteShortcut" shortcut}}>-</button>
+    </div>
+  </div>
+  {{/each}}
+  <div class="row">
+    <div class="col-md-2">
+      {{input id="new_key" name="new_key"}}
+    </div>
+    <div class="col-md-2">
+      {{input id="new_action" name="new_action"}}
+    </div>
+    <div class="col-md-1">
+      <button {{action "addShortcut"}}>+</button>
+    </div>
+  </div>
+  <button {{action "updateShortcuts"}}>Save</button>
+</div>

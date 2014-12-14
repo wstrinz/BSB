@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <input id="add_feed"/>
+  <button {{action 'add_feed'}}>Add feed</button>
+  <p>Show Read: <button {{action toggleShowRead}}>{{controllers.application.showRead}}</button></p>
+  <p>Sort: <button {{action cycleSort}}>{{controllers.application.storySort}}</button></p>
+  <div>
+    <div {{bind-attr class="isRecomputing:show:hidden"}}>
+      {{recomputeStatus}}
+    </div>
+    <button {{action 'recomputeScores'}} {{bind-attr disabled='isRecomputing'}} >{{rescoreMessage}}</button>
+  </div>
+  <div>{{#link-to 'shortcuts'}}Keyboard Shortcuts{{/link-to}}</div>
+</div>

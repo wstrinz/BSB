@@ -183,6 +183,37 @@ put '/api/feeds/:id' do
   end
 end
 
+put '/api/shortcuts/:id' do
+  if authenticated?
+    post_params = JSON.parse(request.body.read)
+    Shortcut.find(params[:id]).update_attributes(post_params["shortcut"])
+  else
+    status 401
+  end
+end
+
+post '/api/shortcuts' do
+  if authenticated?
+    data = JSON.parse(request.body.read)
+    Shortcut.create!(data["shortcut"].delete_if{|k,v| v == nil})
+  else
+    status 401
+  end
+end
+
+delete '/api/shortcuts/:id' do
+  if authenticated?
+    s = Shortcut.find(params[:id])
+    if s.present?
+      s.destroy
+    else
+      status 404
+    end
+  else
+    status 401
+  end
+end
+
 get '*' do
   accepts_json = request.accept.map(&:to_s).include?('application/json')
   only_accepts_all = request.accept.first.to_s == '*/*'
