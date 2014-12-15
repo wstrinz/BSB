@@ -23,6 +23,13 @@ R = Ember.Route.extend RouteMixin,
       @controller.send('viewInBackground')
       @controller.send('toggleCurrentRead')
 
+    addCurrentToPocket: ->
+      current_id = @controller.get('currentStory').get('id')
+      @controller.send('toggleCurrentRead')
+      Ember.$.post("/api/stories/#{current_id}/to_pocket").then (resp) ->
+        console.log('added to pocket!', resp)
+      false
+
     toggleShowInIframe: ->
       c = @controllerFor('application')
       c.set 'showInIframe', !c.get('showInIframe')

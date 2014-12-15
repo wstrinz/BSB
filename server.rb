@@ -82,6 +82,38 @@ helpers do
   def logout!
     session.clear
   end
+
+  def pocket_authenticated?
+    !!session[:pocket_token]
+  end
+
+  def send_story_to_pocket(id)
+    story = Story.find_by(id: id)
+    unless pocket_authenticated?
+      status 401
+      return {error: "not logged in to pocket", status: "not_found"}
+    end
+
+    unless story
+      status 404
+      return {error: "story #{id} not found", status: "not_found"}
+    end
+
+    data = { url: story.url,
+             consumer_key: ENV['POCKET_CONSUMER_KEY'],
+             access_token: session[:pocket_token] }
+    resp = Curl.post('https://getpocket.com/v3/add', data.to_json) do |http|
+      http.headers['Content-Type'] = 'application/json'
+      http.headers['X-Accept'] = 'application/json'
+    end
+    body = resp.body_str
+    if body && resp.response_code == 200
+      JSON.parse(body)
+    else
+      {error: "unexpected response from pocket: #{resp.inspect}"}
+      status resp.response_code
+    end
+  end
 end
 
 configure do
@@ -190,6 +222,11 @@ put '/api/stories/:id' do
   else
     status 401
   end
+end
+
+post '/api/stories/:id/to_pocket' do
+  content_type :json
+  send_story_to_pocket(params[:id]).to_json
 end
 
 put '/api/feeds/:id' do

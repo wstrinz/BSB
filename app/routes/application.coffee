@@ -9,8 +9,10 @@ R = Ember.Route.extend
     'shift+a': 'showAllFeeds'
     'm': 'toggleCurrentRead'
     'r': 'resetFocus'
-    'p': 'toggleShowInIframe'
+    'p': 'addCurrentToPocket'
     'shift+/': 'showHelp'
+
+    #'p': 'toggleShowInIframe'
 
   shortcuts: {}
 
