@@ -214,6 +214,13 @@ delete '/api/shortcuts/:id' do
   end
 end
 
+get '/loggedIn' do
+  content_type :json
+  logged_in = session[:authenticated]
+  owner = authenticated?
+  {logged_in: logged_in, owner: owner}.to_json
+end
+
 get '*' do
   accepts_json = request.accept.map(&:to_s).include?('application/json')
   only_accepts_all = request.accept.first.to_s == '*/*'

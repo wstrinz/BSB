@@ -23,6 +23,9 @@ R = Ember.Route.extend
         this.send('reloadShortcuts')
       , 1000)
 
+  setupController: (controller, model) ->
+    controller.set 'model', model
+    controller.getLoginStatus()
 
   actions:
     backToHome: -> @transitionTo('feeds.index')

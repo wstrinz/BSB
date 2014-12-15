@@ -25,6 +25,13 @@ C = Ember.Controller.extend
 
   showRead: true
   showInIframe: false
+  loggedIn: false
+  guest: true
 
+  getLoginStatus: ->
+    con = this
+    Ember.$.ajax(url: '/loggedIn').then (resp) ->
+      con.set('loggedIn', resp.logged_in == true)
+      con.set('guest', resp.owner != true)
 
 `export default C`

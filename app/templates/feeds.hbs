@@ -3,7 +3,7 @@
     <p>{{unreadCount}}</p>
   </div>
   <div class='row'>
-    <button {{action 'toggleSidebar'}}>
+    <button class="btn btn-default" {{action 'toggleSidebar'}}>
       {{#if showFeeds}}«{{else}}»{{/if}}
     </button>
     <div {{bind-attr class='showFeeds:col-md-3:hidden'}}>

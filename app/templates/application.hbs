@@ -1,3 +1,13 @@
 <h2 id='title' class='no-show-link'>{{#link-to 'feeds.all'}}BSB{{/link-to}}</h2>
+{{#if loggedIn}}
+  {{#if guest}}
+    <p>
+      Thanks for logging in... Guests can't really do anything special though, so you may as
+      well just <a href="/logout">logout</a>
+    </p>
+  {{/if}}
+{{else}}
+  <a class="btn btn-social btn-github" href="/login">Login with Github</a>
+{{/if}}
 
 {{outlet}}
