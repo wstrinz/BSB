@@ -54,7 +54,7 @@ C = Ember.ArrayController.extend NextPrev, Paginates,
         stories = stories.filter((m) -> m.get('read') == false)
 
       target = stories[0]
-      if target && force || !@get('focusedStory')
+      if target && (force || !@get('focusedStory'))
         if current
           current.set('focused', false)
         target.set('focused', true)

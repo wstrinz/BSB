@@ -26,6 +26,7 @@ C = Ember.Controller.extend
   showRead: true
   showInIframe: false
   loggedIn: false
+  linkedToPocket: false
   guest: true
 
   getLoginStatus: ->
@@ -33,5 +34,10 @@ C = Ember.Controller.extend
     Ember.$.ajax(url: '/loggedIn').then (resp) ->
       con.set('loggedIn', resp.logged_in == true)
       con.set('guest', resp.owner != true)
+
+  checkIfLinkedToPocket: ->
+    con = this
+    Ember.$.ajax(url: '/linked_to_pocket').then (resp) ->
+      con.set('linkedToPocket', resp.linked_to_pocket)
 
 `export default C`

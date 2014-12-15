@@ -7,7 +7,17 @@
     </p>
   {{/if}}
 {{else}}
-  <a class="btn btn-social btn-github" href="/login">Login with Github</a>
+  <a class="btn btn-social btn-github" href="/login">
+    <i class="fa fa-github"></i> Login with Github
+  </a>
+  <br>
+  <br>
 {{/if}}
+
+{{#unless linkedToPocket}}
+  <a class="btn btn-social btn-foursquare" href="/pocket_login">
+    <i class="fa fa-github"></i>Link to Pocket
+  </a>
+{{/unless}}
 
 {{outlet}}

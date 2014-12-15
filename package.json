@@ -31,5 +31,8 @@
     "ember-cli-coffeescript": "0.0.7",
     "broccoli-sass": "~0.2.2",
     "ember-cli-pagination": "~0.6.3"
+  },
+  "dependencies": {
+    "ember-notify": "~1.2.0"
   }
 }

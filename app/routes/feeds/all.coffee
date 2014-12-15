@@ -1,5 +1,6 @@
 `import Ember from 'ember'`
 `import RouteMixin from 'ember-cli-pagination/remote/route-mixin'`
+`import Notify from 'ember-notify'`
 
 R = Ember.Route.extend RouteMixin,
   model: (params) ->
@@ -26,8 +27,12 @@ R = Ember.Route.extend RouteMixin,
     addCurrentToPocket: ->
       current_id = @controller.get('currentStory').get('id')
       @controller.send('toggleCurrentRead')
-      Ember.$.post("/api/stories/#{current_id}/to_pocket").then (resp) ->
-        console.log('added to pocket!', resp)
+      Ember.$.post("/api/stories/#{current_id}/to_pocket").then((resp) ->
+        Notify.success('added to pocket!', closeAfter: 3000)
+      ).fail( (resp) ->
+        debugger
+        Notify.alert('failed to add story!', closeAfter: 3000)
+      )
       false
 
     toggleShowInIframe: ->

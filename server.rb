@@ -276,6 +276,12 @@ get '/loggedIn' do
   {logged_in: logged_in, owner: owner}.to_json
 end
 
+get '/linked_to_pocket' do
+  content_type :json
+  linked = session[:pocket_token].present?
+  {linked_to_pocket: linked}.to_json
+end
+
 get '*' do
   accepts_json = request.accept.map(&:to_s).include?('application/json')
   only_accepts_all = request.accept.first.to_s == '*/*'

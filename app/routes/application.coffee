@@ -28,6 +28,7 @@ R = Ember.Route.extend
   setupController: (controller, model) ->
     controller.set 'model', model
     controller.getLoginStatus()
+    controller.checkIfLinkedToPocket()
 
   actions:
     backToHome: -> @transitionTo('feeds.index')
