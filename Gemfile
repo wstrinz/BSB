@@ -16,6 +16,7 @@ gem 'rack-ssl-enforcer'
 
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'omniauth-pocket'
 
 gem 'rspec'
 gem 'factory_girl'

@@ -14,6 +14,7 @@ require 'newrelic_rpm'
 
 require 'omniauth'
 require 'omniauth-github'
+require 'omniauth-pocket'
 
 require 'rack/ssl-enforcer'
 
@@ -74,6 +75,10 @@ helpers do
     end
   end
 
+  def authenticate_pocket!
+    redirect '/auth/pocket'
+  end
+
   def logout!
     session.clear
   end
@@ -90,6 +95,7 @@ configure do
   use OmniAuth::Builder do
     user_scopes = 'user,repo,read:repo_hook,write:repo_hook,admin:repo_hook,read:org'
     provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'], scope: user_scopes
+    provider :pocket, client_id: ENV['POCKET_CONSUMER_KEY']
   end
 
   enable :sessions
@@ -108,6 +114,11 @@ end
 
 get '/login' do
   authenticate!
+end
+
+get '/pocket_login' do
+  redirect '/auth/pocket'
+  #authenticate_pocket!
 end
 
 get '/logout' do
@@ -143,9 +154,16 @@ get '/auth/:provider/callback' do
   content_type :json
 
   auth_hash = request.env['omniauth.auth']
-  session[:authenticated] = true
-  session[:auth_hash] = auth_hash
-  redirect "/"
+  if params[:provider] == 'github'
+    session[:authenticated] = true
+    session[:auth_hash] = auth_hash
+    redirect "/"
+  elsif params[:provider] == 'pocket'
+    session[:pocket_authenticated] = true
+    session[:pocket_name] = auth_hash["uid"]
+    session[:pocket_token] = auth_hash["credentials"]["token"]
+    redirect "/"
+  end
 end
 
 post '/api/feeds' do
