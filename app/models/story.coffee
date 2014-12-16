@@ -16,6 +16,6 @@ Story = DS.Model.extend
   feed: DS.belongsTo 'feed'
   faviconUrl: Ember.computed 'url', -> "http://www.google.com/s2/favicons?domain=#{@get('url')}"
   human_time: Ember.computed 'timestamp', ->
-    moment(@get 'timestamp').format 'LLL'
+    moment(@get 'timestamp').calendar()
 
 `export default Story`
