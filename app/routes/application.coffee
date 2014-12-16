@@ -18,13 +18,6 @@ R = Ember.Route.extend
 
   shortcutsLoaded: false
 
-  beforeModel: (transition) ->
-    unless @get('shortcutsLoaded')
-      @set('shortcutsLoaded', true)
-      Ember.run.later(transition, ->
-        this.send('reloadShortcuts')
-      , 1000)
-
   setupController: (controller, model) ->
     controller.set 'model', model
     controller.getLoginStatus()
@@ -45,6 +38,11 @@ R = Ember.Route.extend
         _this.controller.shortcuts.init()
 
       false
+
+    didTransition: ->
+      unless @get('shortcutsLoaded')
+        @set('shortcutsLoaded', true)
+        @send('reloadShortcuts')
 
     showHelp: ->
       @transitionTo('help')
