@@ -1,29 +1,7 @@
-<div class='row'>
-  <div class='col-md-3'>
-    <p>
-    {{#link-to 'stories' feed.id}}
-    {{feed.name}}
-    {{/link-to}}
-    </p>
-  </div>
-  <div class='col-md-2'>
-    <p>{{author}}</p>
-  </div>
-  <div class='col-md-3'>
-    <p>{{human_time}}</p>
-  </div>
-  <div class='col-md-1'>
-    <button class='fill-all' {{action 'toggleRead'}}>
-      {{#if read}}●{{else}}○{{/if}}
-    </button>
-  </div>
-  <div class='col-md-2'>
-    <button class='fill-all' {{action 'toggleShowInIframe'}}>
-      {{#if showInIframe}}
-        RSS
-      {{else}}
-        Preview
-      {{/if}}
-    </button>
-  </div>
+<div class='col-md-6'>{{story.author}} -- {{story.human_time}}</div>
+<div class='col-md-1'>{{story.score}}</div>
+<div class='col-md-1'>
+  <button class='fill-all' {{action 'toggleRead' story.id}}>
+    {{#if story.read}}●{{else}}○{{/if}}
+  </button>
 </div>
