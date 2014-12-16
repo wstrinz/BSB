@@ -9,17 +9,24 @@
   <div class="story" {{action 'toggleFocus' story}}>
     <li {{bind-attr class="story.focused"}}>
         <div class='story-title'>
-          <a {{bind-attr href="story.url"}} {{action 'openIfFocused' story}}>{{story.title}}</a>
+          <a {{bind-attr href="story.url" class="story.focused::no-show-link"}} {{action 'openIfFocused' story}}>{{story.title}}</a>
         </div>
         <div class="story-info">
           <img class="favicon" {{bind-attr src=story.faviconUrl}} alt="favicon">
+          {{#link-to 'stories' story.feed.id classNames="no-show-link"}}
           {{story.feed.name}}
+          {{/link-to}}
         </div>
       {{#if story.focused}}
       <div class='container-fluid'>
         <div class='row story-summary-info'>
           <div class='col-md-6'>{{story.author}} -- {{story.human_time}}</div>
           <div class='col-md-1'>{{story.score}}</div>
+          <div class='col-md-1'>
+            <button class='fill-all' {{action 'toggleRead' story.id}}>
+              {{#if story.read}}●{{else}}○{{/if}}
+            </button>
+          </div>
         </div>
         <div class='row story-summary'>
           <div class='col-md-12'>{{partial 'stories/story-details'}}</div>
