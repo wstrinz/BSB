@@ -26,23 +26,34 @@ M = Ember.Mixin.create
   actions:
     nextItem: ->
       next = @storyAt(1)
+      current = @get('currentStory')
       if next
-        @get('currentStory').set('focused', false)
+        if current
+          current.set('focused', false)
         @set('focusedStory', next)
         next.set('focused', true)
       else
-        @get('currentStory').set('focused', false)
+        if current
+          current.set('focused', false)
         @send('goToNextPage')
 
     prevItem: ->
       prev = @storyAt(-1)
+      current = @get('currentStory')
+      last = @storyAt @get('model.length')
+
       if prev
-        @get('currentStory').set('focused', false)
+        if current
+          current.set('focused', false)
         @set('focusedStory', prev)
         prev.set('focused', true)
       else
-        @get('currentStory').set('focused', false)
-        @send('goToPrevPage')
+        if current
+          current.set('focused', false)
+          @send('goToPrevPage')
+        else if last
+          @set('focusedStory', last)
+          last.set('focused', true)
 
     focusStory: (story) ->
       @get('currentStory').set('focused', false)

@@ -1,8 +1,9 @@
 `import Ember from 'ember'`
 `import RouteMixin from 'ember-cli-pagination/remote/route-mixin'`
+`import RouteNextPrevMixin from 'feed-ember/mixins/route-next-prev'`
 `import Notify from 'ember-notify'`
 
-R = Ember.Route.extend RouteMixin,
+R = Ember.Route.extend RouteMixin, RouteNextPrevMixin,
   model: (params) ->
     appcon = @controllerFor('application')
     filter_params = sort: appcon.get('storySort')
@@ -16,8 +17,6 @@ R = Ember.Route.extend RouteMixin,
     controller.send 'resetFocus', false
 
   actions:
-    nextItem: -> @controller.send('nextItem')
-    prevItem: -> @controller.send('prevItem')
     viewItem: -> @controller.send('viewItem')
     toggleCurrentRead: -> @controller.send('toggleCurrentRead')
     viewAndMarkItem: ->
@@ -30,7 +29,6 @@ R = Ember.Route.extend RouteMixin,
       Ember.$.post("/api/stories/#{current_id}/to_pocket").then((resp) ->
         Notify.success('added to pocket!', closeAfter: 3000)
       ).fail( (resp) ->
-        debugger
         Notify.alert('failed to add story!', closeAfter: 3000)
       )
       false

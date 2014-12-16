@@ -1,7 +1,8 @@
 `import Ember from 'ember'`
 `import RouteMixin from 'ember-cli-pagination/remote/route-mixin'`
+`import RouteNextPrevMixin from 'feed-ember/mixins/route-next-prev'`
 
-R = Ember.Route.extend RouteMixin,
+R = Ember.Route.extend RouteMixin, RouteNextPrevMixin,
   model: (params) ->
     appcon = @controllerFor('application')
     @set('feed_id', params.feed_id)
@@ -16,8 +17,6 @@ R = Ember.Route.extend RouteMixin,
     controller.send 'resetFocus', false
 
   actions:
-    prevItem: -> @controller.send('prevItem')
-    nextItem: -> @controller.send('nextItem')
     viewItem: -> @controller.send('viewItem')
     toggleCurrentRead: -> @controller.send('toggleCurrentRead')
     viewAndMarkItem: ->

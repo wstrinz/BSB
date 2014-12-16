@@ -1,21 +1,14 @@
 `import Ember from 'ember'`
 `import NextPrev from 'feed-ember/mixins/next_prev'`
 `import Paginates from 'feed-ember/mixins/paginates'`
+`import ReadUnreadMixin from 'feed-ember/mixins/read-unread'`
 
-C = Ember.ArrayController.extend NextPrev, Paginates,
+C = Ember.ArrayController.extend NextPrev, Paginates, ReadUnreadMixin,
   needs: ['application']
   #sortProperties: Ember.computed.alias 'controllers.application.sortMethod'
   sortFunction: Ember.computed.alias 'controllers.application.sortFunction'
 
   sortAscending: false
-
-  showReadStories: Ember.computed 'showRead', ->
-    su = @get 'showRead'
-    if su == undefined
-      @set 'showRead', true
-      true
-    else
-      su
 
   filteredContent: Ember.computed '@each.read', ->
     if @get('showRead')
@@ -24,25 +17,7 @@ C = Ember.ArrayController.extend NextPrev, Paginates,
       @get('content').filter (story) ->
         story.get('read') == false
 
-
-  unreadStories: Ember.computed '@each.read', ->
-    @get('pagedContent').filter (story) ->
-      story.get('read') == false
-
   actions:
-    toggleShowRead: ->
-      su = @get 'showRead'
-      if su == undefined || su == true
-        @set 'showRead', false
-      else
-        @set 'showRead', true
-      null
-
-    toggleRead: (id) ->
-      @store.find('story',id).then (s) ->
-        s.set 'read', !s.get('read')
-        s.save()
-
     resetFocus: (force) ->
       model = @get('model')
       sortMethod = @get 'controllers.application.storySort'
@@ -76,22 +51,5 @@ C = Ember.ArrayController.extend NextPrev, Paginates,
                                 true, false, false, true, 0, null)
       a.dispatchEvent(evt)
       false
-
-    cycleSort: ->
-      @set('controllers.application.storySort', @get('controllers.application.nextSort'))
-      @send('resetFocus', true)
-
-    toggleCurrentRead: ->
-      current = @get 'currentStory'
-
-      if current.get('read')
-        change = 1
-      else
-        change = -1
-
-      current.set 'read', !current.get('read')
-      current.save()
-      current.get('feed').set('unread_count', current.get('feed.unread_count') + change)
-      @send 'nextItem'
 
 `export default C`
