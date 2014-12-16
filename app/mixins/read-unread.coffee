@@ -1,4 +1,5 @@
 `import Ember from 'ember'`
+`import Notify from 'ember-notify'`
 
 ReadUnreadMixin = Ember.Mixin.create
   showRead: Ember.computed.alias 'controllers.application.showRead'
@@ -25,7 +26,14 @@ ReadUnreadMixin = Ember.Mixin.create
         change = -1
 
       current.set 'read', !current.get('read')
-      current.save()
+      current.save().catch (error) ->
+        if error.status == 401
+          Notify.alert('not authorized to modify stories')
+        if error.status == 404
+          Notify.alert("story #{current.get('id')} not found")
+        else
+          Notify.alert('something went wrong saving a story')
+
       current.get('feed').set('unread_count', current.get('feed.unread_count') + change)
       @send 'nextItem'
 

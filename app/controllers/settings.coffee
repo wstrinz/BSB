@@ -2,10 +2,6 @@
 
 SettingsController = Ember.Controller.extend
   needs: ['application']
-  add_feed: ->
-    url = Ember.$('#add_feed').val()
-    new_feed = @store.createRecord 'feed', {feed_url: url, name: 'temp'}
-    new_feed.save()
 
   rescoreMessage: 'Re-score Stories'
   isRecomputing: false
@@ -15,6 +11,11 @@ SettingsController = Ember.Controller.extend
     toggleShowRead: ->
       @set 'controllers.application.showRead', !@get('controllers.application.showRead')
       false
+
+    add_feed: ->
+      url = Ember.$('#add_feed').val()
+      new_feed = @store.createRecord 'feed', {feed_url: url, name: 'temp'}
+      new_feed.save()
 
     cycleSort: ->
       @set 'controllers.application.storySort', @get('controllers.application.nextSort')

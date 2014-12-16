@@ -6,4 +6,8 @@ FeedsEditController = Ember.Controller.extend
       @get('model').save()
       @transitionToRoute('stories', @get('model.id'))
 
+    deleteFeed: ->
+      @get('model').destroyRecord()
+      @transitionToRoute('feeds')
+
 `export default FeedsEditController`

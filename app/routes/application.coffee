@@ -51,5 +51,4 @@ R = Ember.Route.extend
     showAllFeeds: ->
       @transitionTo('feeds.all')
 
-
 `export default R`

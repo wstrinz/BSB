@@ -200,8 +200,11 @@ end
 
 post '/api/feeds' do
   if authenticated?
+    content_type :json
     data = JSON.parse(request.body.read)
-    Feed.create!(data["feed"].delete_if{|k,v| v == nil})
+    f = Feed.create!(data["feed"].delete_if{|k,v| v == nil})
+    f.update
+    {feed: f}.to_json
   else
     status 401
   end
@@ -261,6 +264,20 @@ delete '/api/shortcuts/:id' do
     s = Shortcut.find(params[:id])
     if s.present?
       s.destroy
+    else
+      status 404
+    end
+  else
+    status 401
+  end
+end
+
+delete '/api/feeds/:id' do
+  if authenticated?
+    f = Feed.find(params[:id])
+    if f.present?
+      f.stories.destroy_all
+      f.destroy
     else
       status 404
     end
