@@ -29,9 +29,9 @@ ReadUnreadMixin = Ember.Mixin.create
       current.save().catch (error) ->
         if error.status == 401
           Notify.alert('not authorized to modify stories')
-        if error.status == 404
+        else if error.status == 404
           Notify.alert("story #{current.get('id')} not found")
-        else
+        else if error.status != 200
           Notify.alert('something went wrong saving a story')
 
       current.get('feed').set('unread_count', current.get('feed.unread_count') + change)
