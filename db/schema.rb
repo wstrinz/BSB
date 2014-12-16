@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141213230937) do
+ActiveRecord::Schema.define(version: 20141216164524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20141213230937) do
     t.boolean "time_decay",          default: false, null: false
     t.integer "time_decay_interval", default: 24,    null: false
     t.string  "site_url"
+    t.float   "boost",               default: 1.0,   null: false
   end
 
   create_table "shortcuts", force: true do |t|

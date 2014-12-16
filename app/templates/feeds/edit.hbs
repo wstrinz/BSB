@@ -9,6 +9,10 @@
       <label for='time_decay_interval'>Time Decay Interval (hours)</label>
       {{input id='time_decay_interval' name="time_decay_interval" value=model.time_decay_interval}}
     </div>
+    <div class="row form-group">
+      <label for='time_decay_interval'>Boost</label>
+      {{input id='boost' name="boost" value=model.boost}}
+    </div>
     <button class="btn btn-primary btn-block" type="submit">Save</button>
     <button {{action "deleteFeed"}} class="btn btn-danger btn-block">Delete</button>
   </form>

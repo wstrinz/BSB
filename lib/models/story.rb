@@ -92,10 +92,12 @@ class Story < ActiveRecord::Base
 
   def recompute_score
     if self.feed.time_decay
-      self.score = time_decay_sharecount || 0
+      self.score = time_decay_sharecount || 1
     else
-      self.score = self.sharecount || 0
+      self.score = self.sharecount || 1
     end
+
+    self.score *= self.feed.boost
   end
 
   def update_feed_stats
