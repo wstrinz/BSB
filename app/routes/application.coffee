@@ -47,6 +47,6 @@ R = Ember.Route.extend
     showHelp: ->
       @transitionTo('help')
     showAllFeeds: ->
-      @transitionTo('feeds.all')
+      @transitionTo('feeds.all', queryParams: {page: '0'})
 
 `export default R`
