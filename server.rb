@@ -120,8 +120,6 @@ configure do
   set :public_folder, File.expand_path(path_to 'dist')
   if File.exist? 'secrets.yml'
     ApiKeys.load YAML.load open('secrets.yml').read
-  else
-    puts 'No secrets.yml found, some integrations may be unavailable'
   end
 
   use OmniAuth::Builder do
