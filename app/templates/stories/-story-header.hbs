@@ -5,3 +5,7 @@
     {{#if story.read}}●{{else}}○{{/if}}
   </button>
 </div>
+<div class='col-md-1'>
+  <!--TODO write a less brittle, state dependant function for this -->
+  <button class='fill-all' {{action 'addCurrentToPocket'}}>P</button>
+</div>
