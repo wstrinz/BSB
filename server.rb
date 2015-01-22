@@ -122,14 +122,16 @@ configure do
     ApiKeys.load YAML.load open('secrets.yml').read
   end
 
+  use Rack::Session::Cookie, :key => 'rack.session',
+                           :path => '/',
+                           :expire_after => 2592000,
+                           :secret => ENV['SESSION_SECRET']
+
   use OmniAuth::Builder do
     user_scopes = 'user,repo,read:repo_hook,write:repo_hook,admin:repo_hook,read:org'
     provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'], scope: user_scopes
     provider :pocket, client_id: ENV['POCKET_CONSUMER_KEY']
   end
-
-  enable :sessions
-  set :session_secret, ENV['SESSION_SECRET']
 end
 
 configure :development do
