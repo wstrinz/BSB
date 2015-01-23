@@ -87,6 +87,25 @@ body {
     margin: 0.2em 0 0.5em 0;
   }
 
+  .loader {
+    position: absolute;
+    text-align: center;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  span.loading-cat {
+    width: 20em;
+    height: 15em;
+    display: block;
+    background:url('/images/calmingcatsmall.gif') repeat-x left;
+  }
+
+  p.loading-attribution {
+    margin-top: 1em;
+  }
+
   li.focused {
     font-size: 1.50em;
   }
