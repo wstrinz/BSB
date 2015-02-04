@@ -5,6 +5,9 @@ def path_to(dir)
 end
 
 require 'bundler/setup'
+
+Bundler.require
+
 require 'sinatra'
 require 'sinatra/activerecord'
 require 'will_paginate'
