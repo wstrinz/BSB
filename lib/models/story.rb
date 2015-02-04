@@ -1,5 +1,6 @@
 class Story < ActiveRecord::Base
   belongs_to :feed
+  has_many :keywords
   after_save :update_feed_stats
 
   def self.from_entry(e)
@@ -20,7 +21,9 @@ class Story < ActiveRecord::Base
     props[:created_at] = Time.now
     props[:updated_at] = Time.now
 
-    create!(props)
+    new_story = create!(props)
+    new_story.generate_keywords
+    new_story
   end
 
   def self.refresh_sharecounts
@@ -102,5 +105,16 @@ class Story < ActiveRecord::Base
 
   def update_feed_stats
     feed.update_stats if feed
+  end
+
+  def generate_keywords
+    sanitized_content = Sanitize.clean(story_content)
+    words = sanitized_content.split.each_with_object(Hash.new(0)) do |word, memo|
+      memo[word] += 1
+    end
+
+    words.sort_by{|word, count| count}.first(3).each do |kwd|
+      keywords.create(name: kwd.first.downcase.gsub(/([^[:alpha:]]+)|((?=\w*[a-z])(?=\w*[0-9])\w+)/, ''))
+    end
   end
 end

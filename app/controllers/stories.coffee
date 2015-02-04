@@ -11,6 +11,9 @@ C = Ember.ArrayController.extend NextPrev, Paginates, ReadUnreadMixin,
   model_feed: Ember.computed.alias 'model.firstObject.feed'
   feed_title: Ember.computed.alias 'model.firstObject.feed.name'
   feed_url: Ember.computed.alias 'model.firstObject.feed.feed_url'
+  storyKeywords: Ember.computed ->
+    @get('model.keywords').then ->
+      console.log(arguments)
 
   storyCount: Ember.computed '@each.read', 'showRead', 'feed', ->
     if @get 'showRead'

@@ -11,6 +11,14 @@
       <div class='story-title'>
         <a {{bind-attr href="story.url" class="story.focused::no-show-link"}} {{action 'openIfFocused' story}}>{{story.title}}</a>
       </div>
+      <div class="keywords">
+        Keywords:
+        <ul>
+        {{#each storyKeywords}}
+          <li>{{keyword.name}}</li>
+        {{/each}}
+        </ul>
+      </div>
       <div class="story-info">
         <img class="favicon" {{bind-attr src=story.faviconUrl}} alt="favicon">
         {{#link-to 'stories' story.feed.id classNames="no-show-link"}}

@@ -27,6 +27,8 @@ gem 'curb'
 
 gem 'ruby-hackernews'
 
+gem 'sanitize'
+
 group :development do
   gem 'sqlite3'
 

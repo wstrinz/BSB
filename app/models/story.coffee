@@ -14,6 +14,7 @@ Story = DS.Model.extend
   sharecount: DS.attr 'number'
   score: DS.attr 'number'
   feed: DS.belongsTo 'feed'
+  keywords: DS.hasMany('keywords', {async: true})
   faviconUrl: Ember.computed 'url', -> "http://www.google.com/s2/favicons?domain=#{@get('url')}"
   human_time: Ember.computed 'timestamp', ->
     moment(@get 'timestamp').calendar()

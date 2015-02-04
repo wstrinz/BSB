@@ -9,6 +9,7 @@ R = Ember.Route.extend RouteMixin, RouteNextPrevMixin,
     filter_params = sort: appcon.get('storySort')
     unless appcon.get('showRead')
       filter_params["read"] = false
+    @store.find('keyword')
 
     @findPaged 'story', Ember.$.extend(filter_params, params)
 

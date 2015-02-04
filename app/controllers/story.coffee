@@ -4,6 +4,12 @@ C = Ember.ObjectController.extend
   needs: ['application']
   showInIframe: Ember.computed.alias('controllers.application.showInIframe')
   sandboxIframe: false
+  storyKeywords: Ember.computed ->
+    @get('model.keywords').then ->
+      console.log(arguments)
+
+    ["kwds"]
+
 
   actions:
     toggleRead: ->

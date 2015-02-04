@@ -5,6 +5,9 @@ def path_to(dir)
 end
 
 require 'bundler/setup'
+
+Bundler.require
+
 require 'sinatra'
 require 'sinatra/activerecord'
 require 'will_paginate'
@@ -22,6 +25,7 @@ require 'feedjira'
 
 require path_to('lib/models/feed')
 require path_to('lib/models/story')
+require path_to('lib/models/keyword')
 require path_to('lib/models/story_archives')
 require path_to('lib/models/shortcut')
 require path_to('lib/models/feeds/hacker_news')
@@ -180,6 +184,12 @@ get '/api/stories' do
   resp[:meta] = { total_pages: Story.where(query_opts).count / per_page.to_i }
 
   resp.to_json
+end
+
+get '/api/keywords' do
+  content_type :json
+
+  {keywords: Keyword.all}.to_json
 end
 
 
