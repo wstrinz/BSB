@@ -4,9 +4,12 @@
 /dist
 /tmp
 
+# logs
+/log
+
 # dependencies
 /node_modules
-/bower_components/*
+/bower_components
 
 # misc
 /.sass-cache
@@ -15,6 +18,7 @@
 /libpeerconnection.log
 npm-debug.log
 testem.log
+tags
 
 # keys
 secrets.yml
@@ -22,5 +26,3 @@ secrets.yml
 # dev db
 *.db
 score_recompute.out
-tags
-log/

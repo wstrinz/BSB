@@ -7,20 +7,19 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {{BASE_TAG}}
+    {{content-for 'head'}}
 
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/feed-ember.css">
+
+    {{content-for 'head-footer'}}
   </head>
   <body>
-    <script>
-      window.FeedEmberENV = {{ENV}};
-      window.EmberENV = window.FeedEmberENV.EmberENV;
-    </script>
+    {{content-for 'body'}}
+
     <script src="assets/vendor.js"></script>
     <script src="assets/feed-ember.js"></script>
-    <script>
-      window.FeedEmber = require('feed-ember/app')['default'].create(FeedEmberENV.APP);
-    </script>
+
+    {{content-for 'body-footer'}}
   </body>
 </html>
