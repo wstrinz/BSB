@@ -1,5 +1,6 @@
 class Story < ActiveRecord::Base
   belongs_to :feed
+  has_many :keywords
   after_save :update_feed_stats
 
   def self.from_entry(e)
@@ -102,5 +103,24 @@ class Story < ActiveRecord::Base
 
   def update_feed_stats
     feed.update_stats if feed
+  end
+
+  def generate_keywords
+    sanitized_content = Sanitize.clean(story_content)
+    tokens = sanitized_content.split.reject do |token|
+      token[/[^0-9a-z]/i] || Keyword::STOP_WORDS.include?(token)
+    end.map do |token|
+      Stemmer::stem_word(token).downcase
+    end
+
+    frequencies = tokens.each_with_object(Hash.new(0)) do |word, memo|
+      memo[word] += 1
+    end
+
+    frequencies.sort_by{|word, count| count}.first(3).each do |kwd|
+      # keywords.create(name: kwd.first.downcase.gsub(/([^[:alpha:]]+)|((?=\w*[a-z])(?=\w*[0-9])\w+)/, ''))
+    end
+
+    frequencies.sort_by{|word, count| count}.reverse.first(3)
   end
 end

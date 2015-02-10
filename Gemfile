@@ -22,6 +22,9 @@ gem 'rspec'
 gem 'factory_girl'
 gem 'database_cleaner'
 
+gem 'sanitize'
+gem 'fast-stemmer'
+
 gem 'thin'
 gem 'curb'
 
