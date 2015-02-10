@@ -34,7 +34,8 @@ ReadUnreadMixin = Ember.Mixin.create
         else if error.status != 200
           Notify.alert('something went wrong saving a story')
 
-      current.get('feed').set('unread_count', current.get('feed.unread_count') + change)
+      newCount = current.get('feed.unread_count') + change
+      current.get('feed').set('unread_count', newCount)
       @send 'nextItem'
 
 

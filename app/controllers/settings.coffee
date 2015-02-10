@@ -9,7 +9,8 @@ SettingsController = Ember.Controller.extend
 
   actions:
     toggleShowRead: ->
-      @set 'controllers.application.showRead', !@get('controllers.application.showRead')
+      showRead = 'controllers.application.showRead'
+      @set showRead, !@get(showRead)
       false
 
     add_feed: ->
@@ -18,7 +19,9 @@ SettingsController = Ember.Controller.extend
       new_feed.save()
 
     cycleSort: ->
-      @set 'controllers.application.storySort', @get('controllers.application.nextSort')
+      sortMethod = 'controllers.application.storySort'
+      nextSort = @get('controllers.application.nextSort')
+      @set sortMethod, nextSort
       @get('controllers.stories').send 'resetFocus', true
 
     recomputeScores: ->

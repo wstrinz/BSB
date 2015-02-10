@@ -88,7 +88,11 @@ M = Ember.Mixin.create
 
       currentFeed = model.content[0].get 'feed.id'
       target = stories[0]
-      if target && (force || (!@get('focusedStory') || @get('feed') != currentFeed))
+      shouldReset = (force ||
+                      (!@get('focusedStory') ||
+                        @get('feed') != currentFeed))
+
+      if target && !shouldReset
         if current
           current.set('focused', false)
         target.set('focused', true)
